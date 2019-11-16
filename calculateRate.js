@@ -35,7 +35,12 @@ function calculateRate(req, res) {
     let weight = parseInt(req.query.weight);
     let type = req.query.type;
     let quantity = parseInt(req.query.quantity);
+
+    if (!Number.isInteger(weight)) weight = 0;
+    if (!Number.isInteger(quantity)) quantity = 0;
+
     let total = (calculateTotal(weight, type) * quantity).toFixed(2);
+
     let stuff = {weight: weight, type: keys[type], quantity: quantity, total: total};
     res.render("results", stuff);
 }
