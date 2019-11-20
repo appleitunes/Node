@@ -14,14 +14,12 @@ app.set("port", process.env.PORT || 5000)
    })
    .get("/getRate", calculateRate.calculateRate)
    .get("/getPerson", (req, res) => {
-      // let sql = "SELECT * FROM PERSON;";
-      // pool.query(sql, (err, result) => {
-      //    console.log(result);
-      //    res.write("Hello");
-      //    res.end();
-      // });  
-      res.write("Hello");
-      res.end();
+      let sql = "SELECT * FROM PERSON;";
+      pool.query(sql, (err, result) => {
+         let string = JSON.stringify(result);
+         res.write(string);
+         res.end();
+      });  
    })
    .listen(app.get("port"), () => {
       console.log("Listening on port: " + app.get("port"));
