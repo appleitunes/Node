@@ -17,7 +17,7 @@ app.set("port", process.env.PORT || 5000)
       let sql = "SELECT * FROM PERSON;";
       pool.query(sql, (err, result) => {
          let string = JSON.stringify(result);
-         res.write(string);
+         res.write(string.rows);
          res.end();
       });  
    })
