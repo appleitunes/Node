@@ -1,5 +1,5 @@
 window.onload = () => {
-    httpCall("getPerson")
+    httpCall("getPerson?select=email&table=ACCOUNT")
     .then((data) => {
         document.getElementById("content").innerHTML = data;
     })
