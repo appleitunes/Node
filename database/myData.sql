@@ -1,8 +1,14 @@
 -- heroku pg:psql
 
-CREATE TABLE PERSON (
+CREATE TABLE ACCOUNT (
     person_id       SERIAL          PRIMARY KEY
-,   f_name          VARCHAR(22)     NOT NULL
+,   email           VARCHAR(256)    NOT NULL
+,   hashed_pass     VARCHAR(256)    NOT NULL
+);
+
+CREATE TABLE DECK (
+    deck_id         SERIAL          PRIMARY KEY
+,   title           VARCHAR(256)    NOT NULL
 );
 
 INSERT INTO PERSON (
