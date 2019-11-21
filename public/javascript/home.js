@@ -23,6 +23,9 @@ function insertAccount() {
     let values = ["example@email.com", "87_t4gco8w7nro"];
     let table = "ACCOUNT";
 
+    keys = encodeURI(JSON.stringify(keys));
+    values = encodeURI(JSON.stringify(values));
+
     httpCall(`insertData?keys=${JSON.stringify(keys)}&values=${JSON.stringify(values)}&table=${table}`)
     .then((data) => {
         if (parseInt(data.status) === 0) {

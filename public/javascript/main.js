@@ -13,7 +13,7 @@ function httpCall(url) {
             }
         }
 
-        xHTTP.open("POST", url, true);
+        xHTTP.open("GET", url, true);
         xHTTP.send(null);
     });
 }
