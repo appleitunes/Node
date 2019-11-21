@@ -23,7 +23,7 @@ function getData(req, res) {
    let keys = req.query.keys;
    let table = req.query.table;
 
-   let sql = `SELECT * FROM ACCOUNT;`;
+   let sql = `SELECT ${keys} FROM ${table};`;
 
    pool.query(sql, (err, result) => {
       if (err) {
