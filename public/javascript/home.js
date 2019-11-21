@@ -4,10 +4,11 @@ window.onload = () => {
 };
 
 function getAccount() {
-    let keys = ["email"];
+    let keys = "email";
     let table = "ACCOUNT";
 
-    keys = encodeURI(JSON.stringify(keys));
+    keys = encodeURI(keys);
+    table = encodeURI(table);
 
     httpCall(`getData?keys=${keys}&table=${table}`)
     .then((data) => {
@@ -24,14 +25,15 @@ function getAccount() {
 }
 
 function insertAccount() {
-    let keys = ["email", "hashed_pass"];
-    let values = ["example@email.com", "87_t4gco8w7nro"];
+    let keys = "email, hashed_pass";
+    let values = "'example@email.com', '87_t4gco8w7nro'";
     let table = "ACCOUNT";
 
-    keys = encodeURI(JSON.stringify(keys));
-    values = encodeURI(JSON.stringify(values));
+    keys = encodeURI(keys);
+    values = encodeURI(values);
+    table = encodeURI(table);
 
-    httpCall(`insertData?keys=${JSON.stringify(keys)}&values=${JSON.stringify(values)}&table=${table}`)
+    httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
     .then((data) => {
         if (parseInt(data.status) === 0) {
             throw data.error;

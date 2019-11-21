@@ -19,12 +19,12 @@ app.set("port", process.env.PORT || 5000)
 });
 
 function getData(req, res) {
-   res.header("Content-Type",'application/json');
+   res.header("Content-Type","application/json");
 
-   let keys = JSON.parse(req.query.keys);
+   let keys = eq.query.keys;
    let table = req.query.table;
 
-   let sql = `SELECT ${keys.join(',')} FROM ${table};`;
+   let sql = `SELECT ${keys} FROM ${table};`;
    pool.query(sql, (err, result) => {
       if (err) {
          res.write({
@@ -48,18 +48,11 @@ function getData(req, res) {
 function insertData(req, res) {
    res.header("Content-Type",'application/json');
 
-   let keys = JSON.parse(req.query.keys);
-   let values = JSON.parse(req.query.data);
+   let keys = req.query.keys;
+   let values = req.query.data;
    let table = req.query.table;
 
-   for (i in data) {
-      let val = data[i];
-      if (isNaN(val)) {
-         data[i] = "'" + val + "'";
-      }
-   }
-
-   let sql = `INSERT INTO ${table} (${keys.join(',')}) VALUES (${values.join(',')});`;
+   let sql = `INSERT INTO ${table} (${keys}) VALUES (${values});`;
    pool.query(sql, (err, result) => {
       if (err) {
          res.write({
