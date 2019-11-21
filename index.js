@@ -1,5 +1,6 @@
 const express = require("express");
-var app = express();
+const bcrypt = require("bcrypt");
+const app = express();
 app.use(express.static(__dirname + '/public'));
 
 const { Pool } = require("pg");
@@ -18,29 +19,58 @@ app.set("port", process.env.PORT || 5000)
 });
 
 function getData(req, res) {
-   let select = req.query.select;
+   res.header("Content-Type",'application/json');
+
+   let keys = JSON.parse(req.query.keys);
    let table = req.query.table;
 
-   res.header("Content-Type",'application/json');
-   let sql = `SELECT ${select} FROM ${table};`;
+   let sql = `SELECT ${keys.join(',')} FROM ${table};`;
    pool.query(sql, (err, result) => {
+      if (err) {
+         res.write({
+            status: 0,
+            error: err
+         });
+         res.end();
+      }
+ 
       let JSONData = JSON.stringify(result.rows);
-      res.write(JSONData);
+      res.write({
+         status: 1,
+         data: JSONData
+      });
       res.end();
    });
 }
 
 function insertData(req, res) {
-   // let keys = JSON.parse(req.query.keys);
-   // let data = JSON.parse(req.query.data);
-   // let table = req.query.table;
+   res.header("Content-Type",'application/json');
 
-   // let sql = `INSERT INTO ACCOUNT (${keys.join(',')}) VALUES (${data.join(',')});`;
+   let keys = JSON.parse(req.query.keys);
+   let data = JSON.parse(req.query.data);
+   let table = req.query.table;
 
-   let sql = `INSERT INTO ACCOUNT (email,hashed_pass) VALUES ('shanedavenport15@gmail.com','7tbew986aygfnoausygf');`;
+   for (i in data) {
+      let val = data[i];
+      if (isNaN(val)) {
+         data[i] = "'" + val + "'";
+      }
+   }
+
+   let sql = `INSERT INTO ${table} (${keys.join(',')}) VALUES (${data.join(',')});`;
    pool.query(sql, (err, result) => {
-      let string = JSON.stringify(result.rows);
-      res.write(string);
+      if (err) {
+         res.write({
+            status: 0,
+            error: err
+         });
+         res.end();
+      }
+
+      res.write({
+         status: 1,
+         error: err
+      });
       res.end();
    });
 }
