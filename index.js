@@ -29,6 +29,7 @@ function getData(req, res) {
       if (err) {
          res.write({
             status: 0,
+            data: "",
             error: err
          });
          res.end();
@@ -37,7 +38,8 @@ function getData(req, res) {
       let JSONData = JSON.stringify(result.rows);
       res.write({
          status: 1,
-         data: JSONData
+         data: JSONData,
+         error: ""
       });
       res.end();
    });
@@ -47,7 +49,7 @@ function insertData(req, res) {
    res.header("Content-Type",'application/json');
 
    let keys = JSON.parse(req.query.keys);
-   let data = JSON.parse(req.query.data);
+   let values = JSON.parse(req.query.data);
    let table = req.query.table;
 
    for (i in data) {
@@ -57,7 +59,7 @@ function insertData(req, res) {
       }
    }
 
-   let sql = `INSERT INTO ${table} (${keys.join(',')}) VALUES (${data.join(',')});`;
+   let sql = `INSERT INTO ${table} (${keys.join(',')}) VALUES (${values.join(',')});`;
    pool.query(sql, (err, result) => {
       if (err) {
          res.write({
