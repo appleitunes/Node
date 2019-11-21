@@ -24,15 +24,18 @@ function getData(req, res) {
    let table = req.query.table;
 
    let sql = `SELECT ${keys} FROM ${table};`;
-   sql = "SELECT email FROM ACCOUNTS;"
-   pool.query(sql, (err, result) => {
-      if (err) {
-         res.write(err);
-         res.end();
-      }
+
+   res.write(sql);
+   res.end();
+
+   // pool.query(sql, (err, result) => {
+   //    if (err) {
+   //       res.write(err);
+   //       res.end();
+   //    }
  
-      let JSONData = JSON.stringify(result.rows);
-      res.write(JSONData);
-      res.end();
-   });
+   //    let JSONData = JSON.stringify(result.rows);
+   //    res.write(JSONData);
+   //    res.end();
+   // });
 }
