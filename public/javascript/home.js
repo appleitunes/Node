@@ -16,7 +16,7 @@ function getDecks(accountID) {
 }
 
 function createCard(title, id) {
-    let innerHTML = `<div class='card' onclick="alert(${id}")>`;
+    let innerHTML = `<div class='card' onclick="alert(${id})">`;
     innerHTML += title;
     innerHTML += "</div>";
 
