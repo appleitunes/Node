@@ -1,5 +1,4 @@
 const express = require("express");
-// const bcrypt = require("bcrypt");
 const app = express();
 app.use(express.static(__dirname + '/public'));
 
@@ -13,6 +12,7 @@ app.set("port", process.env.PORT || 5000)
    res.sendFile("home.html", { root: __dirname + "/public"});
 })
 .post("/getData", getData)
+.post("/insertData", insertData)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
 });
@@ -33,6 +33,24 @@ function getData(req, res) {
  
       let JSONData = JSON.stringify(result.rows);
       res.write(JSONData);
+      res.end();
+   });
+}
+
+function insertData() {
+   let keys = req.query.keys;
+   let values = req.query.values;
+   let table = req.query.table;
+
+   let sql = `INSERT INTO ${table} (${keys}) VALUES ${values};`;
+
+   pool.query(sql, (err) => {
+      if (err) {
+         res.write("0");
+         res.end();
+      }
+ 
+      res.write("1");
       res.end();
    });
 }

@@ -1,12 +1,9 @@
 window.onload = () => {
-    getAccount();
-    // insertAccount();
+    getAccount("email", "ACCOUNT");
+    insertAccount();
 };
 
-function getAccount() {
-    let keys = "email";
-    let table = "ACCOUNT";
-
+function getAccount(keys, table) {
     keys = encodeURI(keys);
     table = encodeURI(table);
 
@@ -19,22 +16,25 @@ function getAccount() {
     })
 }
 
-// function insertAccount() {
-//     let keys = "email, hashed_pass";
-//     let values = "'example@email.com', '87_t4gco8w7nro'";
-//     let table = "ACCOUNT";
+function insertAccount() {
+    let keys = "email, hashed_pass";
+    let values = "'example@email.com', '87_t4gco8w7nro'";
+    let table = "ACCOUNT";
 
-//     keys = encodeURI(keys);
-//     values = encodeURI(values);
-//     table = encodeURI(table);
+    keys = encodeURI(keys);
+    values = encodeURI(values);
+    table = encodeURI(table);
 
-//     httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
-//     .then((data) => {
-//         if (parseInt(data.status) === 0) {
-//             throw data.error;
-//         }
-//     })
-//     .catch((error) => {
-//         alert(error);
-//     })
-// }
+    httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
+    .then((data) => {
+        if (data === "1") {
+            alert("Data successfully added.");
+        }
+        else {
+            alert("Something went wrong.");
+        }
+    })
+    .catch((error) => {
+        alert(error);
+    });
+}
