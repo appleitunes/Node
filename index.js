@@ -28,7 +28,7 @@ function getDecks(req, res) {
          res.end();
       }
  
-      res.write(JSON.stringify(result));
+      res.write(JSON.stringify(result.rows));
       res.end();
    });
 }
