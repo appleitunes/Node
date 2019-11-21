@@ -1,6 +1,6 @@
 window.onload = () => {
     getAccount();
-    insertAccount();
+    // insertAccount();
 };
 
 function getAccount() {
