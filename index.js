@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 
 const { Pool } = require("pg");
 const connectionString = process.env.DATABASE_URL || "postgres://qkoefgxxlcvrpi:c10a493d57075b82c1d9b6ed226a83a30ba80cd59b2a94fb2055e38d7cff557c@ec2-174-129-253-162.compute-1.amazonaws.com:5432/dehq73vk2n1uod?ssl=true";
@@ -11,41 +11,16 @@ app.set("port", process.env.PORT || 5000)
 .get("/", (req, res) => {
    res.sendFile("home.html", { root: __dirname + "/public"});
 })
-.post("/getData", getData)
-.post("/insertData", insertData)
+.post("/getDecks", getDecks)
+.post("/getCards", getCards)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
 });
 
-function getData(req, res) {
-   res.header("Content-Type","application/json");
+function getDecks(req, res) {
+   let accountID = req.query.account;
 
-   let keys = req.query.keys;
-   let table = req.query.table;
-   let conditions = req.query.conditions;
-
-   let sql = `SELECT ${keys} FROM ${table}${conditions == "NULL" ? ` WHERE ${conditions}` : ""};`;
-
-   pool.query(sql, (err, result) => {
-      if (err) {
-         res.write(err);
-         res.end();
-      }
- 
-      let JSONData = JSON.stringify(result.rows);
-      res.write(JSONData);
-      res.end();
-   });
-}
-
-function insertData(req, res) {
-   res.writeHead(200, {"content-type":"text/html"});
-
-   let keys = req.query.keys;
-   let values = req.query.values;
-   let table = req.query.table;
-
-   let sql = `INSERT INTO ${table} (${keys}) VALUES (${values});`;
+   let sql = `SELECT * FROM DECK WHERE owner_account=${accountID}`;
 
    pool.query(sql, (err, result) => {
       if (err) {
@@ -53,7 +28,23 @@ function insertData(req, res) {
          res.end();
       }
  
-      res.write("1");
+      res.write(JSON.stringify(result));
+      res.end();
+   });
+}
+
+function getCards(req, res) {
+   let deckID = req.query.deck;
+
+   let sql = `SELECT * FROM CARD WHERE owner_deck=${deckID};`;
+
+   pool.query(sql, (err, result) => {
+      if (err) {
+         res.write("0");
+         res.end();
+      }
+ 
+      res.write(result);
       res.end();
    });
 }

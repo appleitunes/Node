@@ -1,17 +1,66 @@
 -- heroku pg:psql
 
-DROP TABLE IF EXISTS ACCOUNT;
+DROP TABLE IF EXISTS ACCOUNT, DECK, CARD;
 
 CREATE TABLE ACCOUNT (
     account_id      SERIAL          PRIMARY KEY
 ,   email           VARCHAR(256)    NOT NULL
-,   hashed_pass     VARCHAR(256)    NOT NULL
+,   pass            VARCHAR(256)    NOT NULL
+);
+
+CREATE TABLE DECK (
+    deck_id         SERIAL          PRIMARY KEY
+,   title           VARCHAR(256)    NOT NULL
+,   owner_account   SERIAL          REFERENCES ACCOUNT(account_id)
+);
+
+CREATE TABLE CARD (
+    card_id         SERIAL          PRIMARY KEY
+,   front           VARCHAR(22)     NOT NULL
+,   back            VARCHAR(22)     NOT NULL
+,   owner_deck      SERIAL          REFERENCES DECK(deck_id)
 );
 
 INSERT INTO ACCOUNT (
-    email
-,   hashed_pass
+    account_id
+,   email
+,   pass
 ) VALUES (
-    'shanedavenport15@gmail.com'
-,   '7tbew986aygfnoausygf'
+    1
+,   'example@email.com'
+,   'password'
+);
+
+INSERT INTO DECK (
+    deck_id
+,   title
+,   owner_account
+) VALUES (
+    1
+,   'Example Deck'
+,   1
+);
+
+INSERT INTO CARD (
+    card_id
+,   front
+,   back
+,   owner_deck
+) VALUES (
+    1
+,   '1'
+,   '2'
+,   1
+);
+
+INSERT INTO CARD (
+    card_id
+,   front
+,   back
+,   owner_deck
+) VALUES (
+    2
+,   '3'
+,   '4'
+,   1
 );

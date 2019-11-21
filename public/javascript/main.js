@@ -39,16 +39,18 @@ function insertData(keys, values, table) {
     values = encodeURI(values);
     table = encodeURI(table);
 
-    httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
-    .then((data) => {
-        if (data === "1") {
-            alert("Data successfully added.");
-        }
-        else {
-            alert("Something went wrong.");
-        }
-    })
-    .catch((error) => {
-        alert(error);
+    return new Promise((resolve, reject) => {
+        httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
+        .then((data) => {
+            if (data === "1") {
+                resolve();
+            }
+            else {
+                reject("Something went wrong.");
+            }
+        })
+        .catch((error) => {
+            reject(error);
+        });
     });
 }
