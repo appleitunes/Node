@@ -27,22 +27,8 @@ function getDecks(req, res) {
          res.end();
       }
       else {
-         let rows = result.rows;
-
-         for (let i = 0; i < rows.length; i++) {  
-            let row = rows[i];
-            row.cards = [];
-            let newSQL = `SELECT * FROM CARD WHERE owner_deck=${element["deck_id"]}`;
-   
-            pool.query(newSQL, (err, result) => {
-               rows[i].cards.push(JSON.stringify(result));
-            });
-            
-            if (i == rows.length - 1) { 
-               res.write(JSON.stringify(rows));
-               res.end();
-            }
-         }
+         res.write(JSON.stringify(result.rows));
+         res.end();
       }
    });
 }
