@@ -11,17 +11,33 @@ app.set("port", process.env.PORT || 5000)
 .get("/", (req, res) => {
    res.sendFile("home.html", { root: __dirname + "/public"});
 })
-.post("/getPerson", getPerson)
+.post("/getData", getData)
+.post("/insertData", insertData)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
-})
+});
 
-function getPerson(req, res) {
+function getData(req, res) {
    let select = req.query.select;
    let table = req.query.table;
 
    res.header("Content-Type",'application/json');
    let sql = `SELECT ${select} FROM ${table};`;
+   pool.query(sql, (err, result) => {
+      let JSONData = JSON.stringify(result.rows);
+      res.write(JSONData);
+      res.end();
+   });
+}
+
+function insertData(req, res) {
+   // let keys = JSON.parse(req.query.keys);
+   // let data = JSON.parse(req.query.data);
+   // let table = req.query.table;
+
+   // let sql = `INSERT INTO ACCOUNT (${keys.join(',')}) VALUES (${data.join(',')});`;
+
+   let sql = `INSERT INTO ACCOUNT (email,hashed_pass) VALUES ('shanedavenport15@gmail.com','7tbew986aygfnoausygf');`;
    pool.query(sql, (err, result) => {
       let string = JSON.stringify(result.rows);
       res.write(string);
