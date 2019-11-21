@@ -13,7 +13,10 @@ function getAccount() {
     httpCall(`getData?keys=${keys}&table=${table}`)
     .then((data) => {
         document.getElementById("content").innerHTML = data;
-    });
+    })
+    .catch((error) => {
+        document.getElementById("content").innerHTML = error;
+    })
 }
 
 // function insertAccount() {
