@@ -1,10 +1,15 @@
 window.onload = () => {
     getAccount();
-    insertAccount();
+    // insertAccount();
 };
 
 function getAccount() {
-    httpCall("getData?select=email&table=ACCOUNT")
+    let keys = ["email"];
+    let table = "ACCOUNT";
+
+    keys = encodeURI(JSON.stringify(keys));
+
+    httpCall(`getData?keys=${keys}&table=${table}`)
     .then((data) => {
         if (parseInt(data.status) === 0) {
             throw data.error;
