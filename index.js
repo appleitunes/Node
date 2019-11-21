@@ -45,8 +45,6 @@ function insertData(req, res) {
    let table = req.query.table;
 
    let sql = `INSERT INTO ${table} (${keys}) VALUES (${values});`;
-   res.write(sql);
-   res.end();
 
    pool.getConnection(sql, (err, conn) => {
       if (err) {
