@@ -1,6 +1,6 @@
 window.onload = () => {
     getAccount();
-    // insertAccount();
+    insertAccount();
 };
 
 function getAccount() {
@@ -23,7 +23,7 @@ function insertAccount() {
     let values = ["example@email.com", "87_t4gco8w7nro"];
     let table = "ACCOUNT";
 
-    httpCall(`getData?keys=${JSON.stringify(keys)}&values=${JSON.stringify(values)}&table=${table}`)
+    httpCall(`insertData?keys=${JSON.stringify(keys)}&values=${JSON.stringify(values)}&table=${table}`)
     .then((data) => {
         if (parseInt(data.status) === 0) {
             throw data.error;
