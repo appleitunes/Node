@@ -6,7 +6,7 @@ function getDecks(accountID) {
     return new Promise((resolve, reject) => {
         httpCall(`getDecks?account=${accountID}`)
         .then((result) => {
-            result = JSON.parse(result);
+            result = JSON.parse(result)[0];
             createCard(result["title"], result["account_id"]);
         })
         .catch((error) => {
