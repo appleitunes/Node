@@ -4,7 +4,7 @@ window.onload = () => {
 
 function getDecks(accountID) {
     return new Promise((resolve, reject) => {
-        httpCall(`getDecks?account=${accountID}`)
+        httpCall(`getCards?account=${accountID}`)
         .then((result) => {
             document.getElementById("content").innerHTML = result;
         })
