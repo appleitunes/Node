@@ -37,12 +37,16 @@ function getData(req, res) {
    });
 }
 
-function insertData() {
+function insertData(req, res) {
+   res.writeHead(200, {"content-type":"text/html"});
+
    let keys = req.query.keys;
    let values = req.query.values;
    let table = req.query.table;
 
    let sql = `INSERT INTO ${table} (${keys}) VALUES (${values});`;
+   res.write(sql);
+   res.end();
 
    pool.getConnection(sql, (err, conn) => {
       if (err) {
