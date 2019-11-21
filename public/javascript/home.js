@@ -7,7 +7,7 @@ function getDecks(accountID) {
         httpCall(`getDecks?account=${accountID}`)
         .then((result) => {
             result = JSON.parse(result)[0];
-            createCard(result["title"], result["account_id"]);
+            createCard(result["title"], result["deck_id"]);
         })
         .catch((error) => {
             document.getElementById("content").innerHTML = error;
