@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS ACCOUNT;
 
 CREATE TABLE ACCOUNT (
-    person_id       SERIAL          PRIMARY KEY
+    account_id      SERIAL          PRIMARY KEY
 ,   email           VARCHAR(256)    NOT NULL
 ,   hashed_pass     VARCHAR(256)    NOT NULL
 );

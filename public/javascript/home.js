@@ -1,38 +1,22 @@
 window.onload = () => {
-    getAccount("email", "ACCOUNT");
-    insertAccount();
+    getAccount("email", "ACCOUNT", "account_id=1");
+    insertAccount("email, hashed_pass", "'example@email.com', '87_t4gco8w7nro'", "ACCOUNT");
 };
 
-function getAccount(keys, table) {
-    keys = encodeURI(keys);
-    table = encodeURI(table);
-
-    httpCall(`getData?keys=${keys}&table=${table}`)
-    .then((data) => {
-        document.getElementById("content").innerHTML = data;
+function getAccount(keys, table, conditions) {
+    getData(keys, table, conditions)
+    .then((result) => {
+        document.getElementById("content").innerHTML = result;
     })
     .catch((error) => {
         document.getElementById("content").innerHTML = error;
-    })
+    });
 }
 
-function insertAccount() {
-    let keys = "email, hashed_pass";
-    let values = "'example@email.com', '87_t4gco8w7nro'";
-    let table = "ACCOUNT";
-
-    keys = encodeURI(keys);
-    values = encodeURI(values);
-    table = encodeURI(table);
-
-    httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
-    .then((data) => {
-        if (data === "1") {
-            alert("Data successfully added.");
-        }
-        else {
-            alert("Something went wrong.");
-        }
+function insertAccount(keys, values, table) {
+    insertData(keys, values, table)
+    .then((result) => {
+        alert(result);
     })
     .catch((error) => {
         alert(error);

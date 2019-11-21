@@ -22,8 +22,9 @@ function getData(req, res) {
 
    let keys = req.query.keys;
    let table = req.query.table;
+   let conditions = req.query.conditions;
 
-   let sql = `SELECT ${keys} FROM ${table};`;
+   let sql = `SELECT ${keys} FROM ${table}${conditions == "NULL" ? ` WHERE ${conditions}` : ""};`;
 
    pool.query(sql, (err, result) => {
       if (err) {

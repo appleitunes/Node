@@ -17,3 +17,38 @@ function httpCall(url) {
         xHTTP.send(null);
     });
 }
+
+function getData(keys, table, conditions="NULL") {
+    keys = encodeURI(keys);
+    table = encodeURI(table);
+    conditions = encodeURI(conditions);
+
+    return new Promise((resolve, reject) => {
+        httpCall(`getData?keys=${keys}&table=${table}&conditions=${conditions}`)
+        .then((data) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error);
+        })
+    });
+}
+
+function insertData(keys, values, table) {
+    keys = encodeURI(keys);
+    values = encodeURI(values);
+    table = encodeURI(table);
+
+    httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
+    .then((data) => {
+        if (data === "1") {
+            alert("Data successfully added.");
+        }
+        else {
+            alert("Something went wrong.");
+        }
+    })
+    .catch((error) => {
+        alert(error);
+    });
+}
