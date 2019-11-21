@@ -12,34 +12,26 @@ function getAccount() {
 
     httpCall(`getData?keys=${keys}&table=${table}`)
     .then((data) => {
-        if (parseInt(data.status) === 0) {
-            throw data.error;
-        }
-        else {
-            document.getElementById("content").innerHTML = data.data;
-        }
-    })
-    .catch((error) => {
-        document.getElementById("content").innerHTML = error;
-    });
-}
-
-function insertAccount() {
-    let keys = "email, hashed_pass";
-    let values = "'example@email.com', '87_t4gco8w7nro'";
-    let table = "ACCOUNT";
-
-    keys = encodeURI(keys);
-    values = encodeURI(values);
-    table = encodeURI(table);
-
-    httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
-    .then((data) => {
-        if (parseInt(data.status) === 0) {
-            throw data.error;
-        }
-    })
-    .catch((error) => {
-        alert(error);
+        document.getElementById("content").innerHTML = data;
     })
 }
+
+// function insertAccount() {
+//     let keys = "email, hashed_pass";
+//     let values = "'example@email.com', '87_t4gco8w7nro'";
+//     let table = "ACCOUNT";
+
+//     keys = encodeURI(keys);
+//     values = encodeURI(values);
+//     table = encodeURI(table);
+
+//     httpCall(`insertData?keys=${keys}&values=${values}&table=${table}`)
+//     .then((data) => {
+//         if (parseInt(data.status) === 0) {
+//             throw data.error;
+//         }
+//     })
+//     .catch((error) => {
+//         alert(error);
+//     })
+// }
