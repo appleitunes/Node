@@ -20,7 +20,7 @@ app.set("port", process.env.PORT || 5000)
 function getData(req, res) {
    res.header("Content-Type","application/json");
 
-   let keys = eq.query.keys;
+   let keys = req.query.keys;
    let table = req.query.table;
 
    let sql = `SELECT ${keys} FROM ${table};`;
