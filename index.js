@@ -27,20 +27,12 @@ function getData(req, res) {
    let sql = `SELECT ${keys} FROM ${table};`;
    pool.query(sql, (err, result) => {
       if (err) {
-         res.write({
-            status: 0,
-            data: "",
-            error: err
-         });
+         res.write(err);
          res.end();
       }
  
       let JSONData = JSON.stringify(result.rows);
-      res.write({
-         status: 1,
-         data: JSONData,
-         error: ""
-      });
+      res.write(JSONData);
       res.end();
    });
 }
@@ -53,19 +45,14 @@ function insertData(req, res) {
    let table = req.query.table;
 
    let sql = `INSERT INTO ${table} (${keys}) VALUES (${values});`;
+
    pool.query(sql, (err, result) => {
       if (err) {
-         res.write({
-            status: 0,
-            error: err
-         });
+         res.write(err);
          res.end();
       }
 
-      res.write({
-         status: 1,
-         error: err
-      });
+      res.write(result);
       res.end();
    });
 }
