@@ -11,7 +11,7 @@ function loadDecks(accountID) {
             for (i in decks) {
                 let newDeck = decks[i];
                 let templateCopy = template.replace("$title", newDeck.title);
-                templateCopy = template.replace("$deckID", newDeck.deck_id);
+                templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
                 document.getElementById("list-container").innerHTML += templateCopy;
             }
         })
