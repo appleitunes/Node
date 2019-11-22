@@ -4,10 +4,9 @@ function loadRest() {
         getDecks(1)
         .then((decks) => {
             document.getElementById("list-container").innerHTML = "";
-            alert(JSON.stringify(decks));
             for (i in decks) {
-                let deck = decks[i];
-                let templateCopy = template.replace("$title". deck.title);
+                let newDeck = decks[i];
+                let templateCopy = template.replace("$title". newDeck.title);
                 document.getElementById("list-container").innerHTML += templateCopy;
             }
         });

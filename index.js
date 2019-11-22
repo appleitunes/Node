@@ -19,7 +19,7 @@ app.set("port", process.env.PORT || 5000)
 function getDecks(req, res) {
    let accountID = req.query.account;
 
-   let SQL = `SELECT * FROM DECK WHERE owner_account=${accountID}`;
+   let SQL = `SELECT title, deck_id FROM DECK WHERE owner_account=${accountID}`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
