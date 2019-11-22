@@ -7,7 +7,10 @@ function loadDecks(accountID) {
     .then((template) => {
         getDecks(accountID)
         .then((decks) => {
-            if (decks.length !== 0) {
+            if (decks.length == 0) {
+                document.getElementById("list-container").innerHTML = "There are no Decks assigned to this account.";
+            }
+            else {
                 document.getElementById("list-container").innerHTML = "";
                 for (i in decks) {
                     let newDeck = decks[i];
@@ -15,9 +18,6 @@ function loadDecks(accountID) {
                     templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
                     document.getElementById("list-container").innerHTML += templateCopy;
                 }
-            }
-            else {
-                document.getElementById("list-container").innerHTML = "There are no Decks assigned to this account.";
             }
         })
         .catch((error) => {
