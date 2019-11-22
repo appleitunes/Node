@@ -1,24 +1,30 @@
 window.onload = () => {
-    getDecks(1);
+    getDecks(1)
+    then((result) => {
+        alert(JSON.stringify(result));
+    });
 };
 
 function getDecks(accountID) {
     return new Promise((resolve, reject) => {
         httpCall(`getDecks?account=${accountID}`)
         .then((result) => {
-            result = JSON.parse(result)[0];
-            createCard(result["title"], result["deck_id"]);
+            resolve(JSON.parse(result));
         })
         .catch((error) => {
-            document.getElementById("content").innerHTML = error;
+            reject(error);
         })
     });
 }
 
-function createCard(title, id) {
-    let innerHTML = `<div class='card' onclick="alert(${id})">`;
-    innerHTML += title;
-    innerHTML += "</div>";
-
-    document.getElementById("content").innerHTML += innerHTML;
+function getCards(deckID) {
+    return new Promise((resolve, reject) => {
+        httpCall(`getDecks?account=${deckID}`)
+        .then((result) => {
+            resolve(JSON.parse(result));
+        })
+        .catch((error) => {
+            reject(error);
+        })
+    });
 }

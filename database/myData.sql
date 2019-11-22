@@ -36,7 +36,7 @@ INSERT INTO DECK (
 ,   title
 ,   owner_account
 ) VALUES (
-    1
+    2
 ,   'Example Deck'
 ,   1
 );
@@ -47,10 +47,10 @@ INSERT INTO CARD (
 ,   back
 ,   owner_deck
 ) VALUES (
-    1
+    3
 ,   '1'
 ,   '2'
-,   1
+,   2
 );
 
 INSERT INTO CARD (
@@ -59,8 +59,8 @@ INSERT INTO CARD (
 ,   back
 ,   owner_deck
 ) VALUES (
-    2
+    4
 ,   '3'
 ,   '4'
-,   1
+,   2
 );
