@@ -22,45 +22,27 @@ CREATE TABLE CARD (
 );
 
 INSERT INTO ACCOUNT (
-    account_id
-,   email
+    email
 ,   pass
 ) VALUES (
-    1
-,   'example@email.com'
+    'example@email.com'
 ,   'password'
 );
 
 INSERT INTO DECK (
-    deck_id
-,   title
+    title
 ,   owner_account
 ) VALUES (
-    2
-,   'Example Deck'
+    'Example Deck'
 ,   1
 );
 
 INSERT INTO CARD (
-    card_id
-,   front
+    front
 ,   back
 ,   owner_deck
 ) VALUES (
-    3
-,   '1'
+    '1'
 ,   '2'
-,   2
-);
-
-INSERT INTO CARD (
-    card_id
-,   front
-,   back
-,   owner_deck
-) VALUES (
-    4
-,   '3'
-,   '4'
-,   2
+,    3
 );

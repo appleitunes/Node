@@ -7,12 +7,17 @@ function loadDecks(accountID) {
     .then((template) => {
         getDecks(accountID)
         .then((decks) => {
-            document.getElementById("list-container").innerHTML = "";
-            for (i in decks) {
-                let newDeck = decks[i];
-                let templateCopy = template.replace("$title", newDeck.title);
-                templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
-                document.getElementById("list-container").innerHTML += templateCopy;
+            if (decks.length !== 0) {
+                document.getElementById("list-container").innerHTML = "";
+                for (i in decks) {
+                    let newDeck = decks[i];
+                    let templateCopy = template.replace("$title", newDeck.title);
+                    templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
+                    document.getElementById("list-container").innerHTML += templateCopy;
+                }
+            }
+            else {
+                document.getElementById("list-container").innerHTML = "There are no Decks assigned to this account.";
             }
         })
         .catch((error) => {
