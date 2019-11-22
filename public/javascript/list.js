@@ -4,6 +4,7 @@ function loadRest() {
         getDecks(1)
         .then((decks) => {
             document.getElementById("list-container").innerHTML = "";
+            alert(JSON.stringify(deck));
             for (i in decks) {
                 let deck = decks[i];
                 let templateCopy = template.replace("$title". deck.title);
