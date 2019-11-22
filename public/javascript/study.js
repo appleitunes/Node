@@ -7,7 +7,7 @@ function loadDecks(accountID) {
     .then((template) => {
         getDecks(accountID)
         .then((decks) => {
-            if (decks.length == 0) {
+            if (decks.length < 1) {
                 document.getElementById("list-container").innerHTML = "There are no Decks assigned to this account.";
             }
             else {
