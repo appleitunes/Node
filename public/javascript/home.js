@@ -1,6 +1,6 @@
 window.onload = () => {
     getDecks(1)
-    then((result) => {
+    .then((result) => {
         alert(JSON.stringify(result));
     });
 };
