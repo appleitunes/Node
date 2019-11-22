@@ -45,7 +45,7 @@ function getDecks(accountID) {
 
 function getCards(deckID) {
     return new Promise((resolve, reject) => {
-        httpCall(`getDecks?account=${deckID}`, "POST")
+        httpCall(`getCards?account=${deckID}`, "POST")
         .then((result) => {
             resolve(JSON.parse(result));
         })
