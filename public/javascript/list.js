@@ -6,7 +6,7 @@ function loadRest() {
             document.getElementById("list-container").innerHTML = "";
             for (i in decks) {
                 let newDeck = decks[i];
-                let templateCopy = template.replace("$title". newDeck.title);
+                let templateCopy = template.replace("$title", newDeck.title);
                 document.getElementById("list-container").innerHTML += templateCopy;
             }
         });
