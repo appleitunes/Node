@@ -1,0 +1,38 @@
+#navbar-container {
+    padding-bottom: 7em;
+}
+
+#navbar {
+    margin: auto;
+    width: 100%;
+    border-bottom: solid 1px gray;
+    position: fixed;
+    background-color: white;
+    z-index: 10;
+}
+
+#navbar ul {
+    list-style-type: none;
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    padding: 0;
+}
+
+#navbar li {
+    display: block;
+    padding: 1em;
+    float: left;
+}
+
+#navbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navbar li a:hover {
+    color: gray;
+}

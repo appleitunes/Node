@@ -8,7 +8,7 @@ const pool = new Pool({connectionString: connectionString});
 app.set("port", process.env.PORT || 5000)
 .use(express.static(__dirname + "/public"))
 .get("/", (req, res) => {
-   res.sendFile("home.html", { root: __dirname + "/public"});
+   res.sendFile("list.html", { root: __dirname + "/public"});
 })
 .post("/getDecks", getDecks)
 .post("/getCards", getCards)

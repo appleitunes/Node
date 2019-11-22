@@ -1,4 +1,4 @@
-function httpCall(url) {
+function httpCall(url, method="GET") {
     return new Promise((resolve, reject) => {
         let xHTTP = new XMLHttpRequest();
 
@@ -13,21 +13,7 @@ function httpCall(url) {
             }
         }
 
-        xHTTP.open("POST", url, true);
+        xHTTP.open(method, url, true);
         xHTTP.send(null);
     });
 }
-
-// function httpCall(url) {
-//     return new Promise((resolve, reject) => {
-//         fetch(url, {
-//             method: 'post',
-//         })
-//         .then((response) => {
-//             resolve(response);
-//         })
-//         .catch((error) => {
-//             reject(error);
-//         });
-//     });
-// }

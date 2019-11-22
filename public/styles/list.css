@@ -1,0 +1,26 @@
+#list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#list-container .item-container {
+    width: 18em;
+    height: 15em;
+    position: relative;
+}
+
+#list-container .item {
+    width: 14em;
+    height: 14em;
+
+    top: 50%;
+    left: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+    border: solid 1px gray;
+    border-radius: 0.5em;
+}

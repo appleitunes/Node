@@ -1,0 +1,58 @@
+#layout-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    width: 80%;
+    margin: auto;
+}
+
+#layout-container .banner-container {
+    width: 100%;
+    padding-bottom: 1em;
+    position: relative;
+}
+
+#layout-container .banner {
+    border: solid 1px gray;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
+#layout-container .content-container {
+    position: relative;
+    border-radius: 0.5em;
+}
+
+#layout-container .sidebar-container {
+    border-radius: 0.5em;
+    height: fit-content;
+    text-align: center;
+    border-radius: 0.5em;
+    border: solid 1px gray;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 7em;
+}
+
+@media only screen and (min-width: 630px) {
+    #layout-container .content-container {
+        width: 69.5%;
+    }
+    
+    #layout-container .sidebar-container {
+        width: 29.5%;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    #layout-container .content-container {
+        width: 90%;
+    }
+    
+    #layout-container .sidebar-container {
+        width: 90%;
+    }
+}
