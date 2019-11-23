@@ -6,6 +6,7 @@ class Deck {
         this.index = 0;
         this.resolve = resolve;
         this.disabled = false;
+        this.active = true;
 
         this.objects = {
             container: document.getElementById("card_container"),
@@ -54,47 +55,50 @@ class Deck {
     loadNext(isCorrect=false) {
         let currCard = this.data[this.index];
 
-        if (isCorrect) {
-            currCard["state"]++;
+        if (this.active) {
 
-            if (currCard["state"] == 4) {
-                this.data.splice(this.index, this.index + 1);
+            if (isCorrect) {
+                currCard["state"]++;
+
+                if (currCard["state"] == 4) {
+                    this.data.splice(this.index, this.index + 1);
+                }
             }
-        }
-        else if (2 <= currCard["state"]) {
-            currCard["state"] -= 2;
-        }
+            else if (2 <= currCard["state"]) {
+                currCard["state"] -= 2;
+            }
 
-        // Select the next card in the index
-        this.index = (this.index + 1) % this.data.length;
-        currCard = this.data[this.index];
+            // Select the next card in the index
+            this.index = (this.index + 1) % this.data.length;
+            currCard = this.data[this.index];
 
-        if (currCard) {
-            let state = currCard["state"];
+            if (currCard) {
+                let state = currCard["state"];
 
-            // Alternate which word is on the front
-            if (state % 2 == 0) {
-                this.front = currCard.front;
-                this.back = currCard.back;
+                // Alternate which word is on the front
+                if (state % 2 == 0) {
+                    this.front = currCard.front;
+                    this.back = currCard.back;
+                }
+                else {
+                    this.front = currCard.back;
+                    this.back = currCard.front;
+                }
+
+                // Give a hint if needed
+                if (state < 2) {
+                    this.objects.input.placeholder = this.back;
+                }
+                else {
+                    this.objects.input.placeholder = "";
+                }
             }
             else {
-                this.front = currCard.back;
-                this.back = currCard.front;
+                this.resolve();
             }
 
-            // Give a hint if needed
-            if (state < 2) {
-                this.objects.input.placeholder = this.back;
-            }
-            else {
-                this.objects.input.placeholder = "";
-            }
+            this.objects.text.innerText = this.front;
         }
-        else {
-            this.resolve();
-        }
-
-        this.objects.text.innerText = this.front;
     }
 
     // Turn the card over to the other side
@@ -174,8 +178,7 @@ function startDeck(data, title) {
         document.getElementById("deck_title").innerText = title;
     })
     .then(() => {
-        delete deck;
-        document.getElementById("item-container").innerHTML = "";
+        deck.active = false;
         document.location.href = `study.html`;
     });
 }
