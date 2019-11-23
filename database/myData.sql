@@ -33,7 +33,7 @@ INSERT INTO DECK (
     title
 ,   owner_account
 ) VALUES (
-    'Example Deck'
+    'Simple English'
 ,   1
 );
 
@@ -42,7 +42,7 @@ INSERT INTO CARD (
 ,   back
 ,   owner_deck
 ) VALUES (
-    '1'
-,   '2'
-,    2
+    'yes'
+,   'yes'
+,    5
 );
