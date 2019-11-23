@@ -168,11 +168,13 @@ function startDeck(data, title) {
         card.state = 0;
     }
 
+    let deck;
     new Promise((resolve) => {
-        new Deck(data, resolve);
+        deck = new Deck(data, resolve);
         document.getElementById("deck_title").innerText = title;
     })
     .then(() => {
+        delete deck;
         document.getElementById("item-container").innerHTML = "";
         document.location.href = `study.html`;
     });
