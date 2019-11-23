@@ -14,11 +14,10 @@
     width: 14em;
     height: 14em;
 
-    top: 50%;
     left: 50%;
     margin: auto;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
 
     text-align: center;
     border: solid 1px gray;
