@@ -1,8 +1,40 @@
-.item {
-    cursor: pointer;
-}
-
 .banner {
     background-color: rgb(77, 172, 204);
     color: white;
+}
+
+.sidebar-container {
+    background-color: rgb(77, 172, 204);
+    color: white;
+}
+
+.options {
+    width: 100%;
+    position: absolute;
+    bottom: 1em;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.options img {
+    width: 2em;
+    height: auto;
+    border: solid 1px gray;
+    border-radius: 0.5em;
+    transition: 0.15s;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.options img:hover {
+    transform: translate(0, -0.2em);
+    background-color: lightgray;
+}
+
+.sidebar-container {
+    cursor: pointer;
+}
+
+#list-container .item {
+    box-shadow: 0 5px 0 grey;
 }

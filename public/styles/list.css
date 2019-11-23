@@ -5,14 +5,14 @@
 }
 
 #list-container .item-container {
-    width: 18em;
+    width: 13.5em;
     height: 15em;
     position: relative;
 }
 
 #list-container .item {
-    width: 14em;
-    height: 14em;
+    width: 13em;
+    height: 13em;
 
     left: 50%;
     margin: auto;
