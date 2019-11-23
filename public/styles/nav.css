@@ -7,8 +7,9 @@
     width: 100%;
     border-bottom: solid 1px gray;
     position: fixed;
-    background-color: white;
     z-index: 10;
+    background-color: white;
+    font-weight: bold;
 }
 
 #navbar ul {
@@ -27,10 +28,10 @@
 
 #navbar li a {
     display: block;
-    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    color: black;
 }
 
 #navbar li a:hover {

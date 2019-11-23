@@ -14,7 +14,8 @@ function loadDecks(accountID) {
                 document.getElementById("list-container").innerHTML = "";
                 for (i in decks) {
                     let newDeck = decks[i];
-                    let templateCopy = template.replace("$title", newDeck.title);
+                    let templateCopy = template.replace("$title1", newDeck.title);
+                    templateCopy = templateCopy.replace("$title2", newDeck.title);
                     templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
                     document.getElementById("list-container").innerHTML += templateCopy;
                 }
@@ -26,10 +27,11 @@ function loadDecks(accountID) {
     });
 }
 
-function loadCards(deckID) {
+function loadCards(deckID, title) {
     getCards(deckID)
     .then((cards) => {
-        alert(JSON.stringify(cards));
+        const data = encodeURI(JSON.stringify(cards));
+        document.URL = `study.html?data=${data}&title=${title}`;
     })
     .catch((error) => {
         alert(error);

@@ -44,5 +44,5 @@ INSERT INTO CARD (
 ) VALUES (
     '1'
 ,   '2'
-,    3
+,    1
 );

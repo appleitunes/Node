@@ -12,6 +12,8 @@
     padding-top: 1em;
     padding-bottom: 5em;
     margin-top: auto;
+
+    background-color: gray;
 }
 
 #footer-content {
@@ -27,5 +29,5 @@
 }
 
 #footer-content li a {
-    color: black;
+    color: white;
 }
