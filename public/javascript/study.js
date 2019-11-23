@@ -31,7 +31,7 @@ function loadCards(deckID, title) {
     getCards(deckID)
     .then((cards) => {
         const data = encodeURI(JSON.stringify(cards));
-        document.location.href = `study.html?data=${data}&title=${title}`;
+        document.location.href = `quiz.html?data=${data}&title=${title}`;
     })
     .catch((error) => {
         alert(error);
