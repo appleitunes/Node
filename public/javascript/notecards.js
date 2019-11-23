@@ -173,6 +173,7 @@ function startDeck(data, title) {
         document.getElementById("deck_title").innerText = title;
     })
     .then(() => {
+        document.getElementById("item-container").innerHTML = "";
         document.location.href = `study.html`;
     });
 }
