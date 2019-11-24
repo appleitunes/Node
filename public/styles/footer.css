@@ -4,8 +4,6 @@
 }
 
 #footer {
-    border-top: solid 1px gray;
-
     width: 100%;
     height: fit-content;
 
@@ -13,7 +11,7 @@
     padding-bottom: 5em;
     margin-top: auto;
 
-    background-color: gray;
+    background-color: rgb(60, 60, 60);
 }
 
 #footer-content {
