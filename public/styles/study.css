@@ -8,6 +8,11 @@
     color: white;
 }
 
+#list-container img {
+    height: 16px;
+    width: auto;
+}
+
 .options {
     width: 100%;
     position: absolute;
