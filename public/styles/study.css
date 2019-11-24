@@ -6,6 +6,11 @@
 .sidebar-container {
     background-color: rgb(77, 172, 204);
     color: white;
+    transition: 0.15s;
+}
+
+.sidebar-container:hover {
+    background-color: rgb(57, 152, 184);
 }
 
 #loading {
@@ -24,7 +29,7 @@
 .options img {
     width: 2em;
     height: auto;
-    border: solid 1px gray;
+    border: solid 2px lightgray;
     border-radius: 0.5em;
     transition: 0.15s;
     padding: 0.5em;
