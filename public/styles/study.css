@@ -1,10 +1,10 @@
 .banner {
-    background-color: rgb(77, 172, 204);
+    background-color: rgb(40, 148, 184);
     color: white;
 }
 
 .sidebar-container {
-    background-color: rgb(77, 172, 204);
+    background-color: rgb(40, 148, 184);
     color: white;
     transition: 0.15s;
 }
