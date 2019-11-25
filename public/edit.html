@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Edit</title>
+
+		<link rel="stylesheet" type="text/css" href="styles/main.css">
+		<link rel="stylesheet" type="text/css" href="styles/nav.css">
+        <link rel="stylesheet" type="text/css" href="styles/footer.css">
+        <link rel="stylesheet" type="text/css" href="styles/edit.css">
+        <link rel="stylesheet" type="text/css" href="styles/layout.css">
+
+		<script src="javascript/load.js"></script>
+        <script src="javascript/main.js"></script>
+        <script src="javascript/edit.js"></script>
+	</head>
+	<body>
+		<div id="navbar-container">
+			<div id="navbar">
+			</div>
+		</div>
+        
+        <div id="layout-container">
+            <div class="banner-container">
+                <div class="banner">
+                    <input type="text" placeholder="TITLE">
+                    <br><br>
+                    <div id="cards-container">
+                        <li class="row">
+                            <div class="delete" onclick="deleteCard(this)">X</div>
+                            <div class="card"><textarea class="text" placeholder="FRONT"></textarea></div>
+                            <div class="card"><textarea class="text" placeholder="BACK"></textarea></div>
+                        </li>
+                    </div>
+                </div>
+                <div style="margin:auto;width:fit-content;">
+                    <button id="add-card" onclick="addCard()">ADD CARD</button>
+                </div>
+                <br>
+                <div id="button-container">
+                    <a href="study.html"><button>CANCEL</button></a>
+                    <button>SAVE</button>
+                </div>
+            </div>
+        </div>
+
+		<div id="footer-container">
+			<div id="footer">
+				<div id="footer-content">
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
