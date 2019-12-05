@@ -52,9 +52,31 @@ function getCards(req, res) {
 }
 
 function addDeck(req, res) {
+   let userID = req.query.id;
    let title = req.query.title;
    let data = JSON.parse(req.query.data);
 
+   let SQL = `INSERT INTO DECK (title, owner_account) VALUES (${title}, ${userID})`;
+
+   pool.query(SQL, (err, result) => {
+      if (err) {
+         res.write("0");
+         res.end();
+      }
+      else {
+         addCards(data, result.insertId);
+      }
+   });
+
    res.write(JSON.stringify(data));
    res.end();
+}
+
+function addCards(data, deckID) {
+   for (i in data) {
+      let front = i;
+      let back = data[i];
+      let SQL = `INSERT INTO DECK (front, back, owner_deck) VALUES (${front}, ${back}), ${deckID}`;
+      pool.query(SQL, null);
+   }
 }
