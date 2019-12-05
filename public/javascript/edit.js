@@ -19,7 +19,7 @@ function setCard(card) {
 
 function addCard() {
     let newCard = createCard();
-    document.getElementById("cards-container").appendChild(createCard());
+    document.getElementById("cards-container").appendChild(newCard);
 }
 
 function deleteCard(card) {
@@ -58,18 +58,26 @@ function createCard() {
 }
 
 function saveCards() {
-    let data = getCardData();
-    alert(JSON.stringify(data));
+    let rawData = getCardData();
+    let title = rawData.title;
+    let data = decodeURI(JSON.stringify(rawData.data));
+
+    let url = `?title=${title}&data=${data}`;
+
+    httpCall()
 }
 
 function getCardData() {
     let container = document.getElementById("cards-container");
     let inputs = container.getElementsByClassName("text");
 
-    let data = {};
+    let data = [];
 
     for (let i = 0; i < inputs.length; i += 2) {
-        data[inputs[i].value] = inputs[i + 1].value;
+        data.push({
+            front: inputs[i].value,
+            back: inputs[i + 1].value
+        });
     }
 
     let title = document.getElementById("input-title").value;

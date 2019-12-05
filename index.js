@@ -10,8 +10,9 @@ app.set("port", process.env.PORT || 5000)
 .get("/", (req, res) => {
    res.sendFile("study.html", { root: __dirname + "/public"});
 })
-.post("/getDecks", getDecks)
-.post("/getCards", getCards)
+.get("/getDecks", getDecks)
+.get("/getCards", getCards)
+.post("/addDeck", addDeck)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
 });
@@ -48,4 +49,9 @@ function getCards(req, res) {
          res.end();
       }
    });
+}
+
+function addDeck() {
+   let deckID = req.query.account;
+
 }

@@ -33,7 +33,7 @@ function loadCards(deckID, title) {
 
 function getDecks(accountID) {
     return new Promise((resolve, reject) => {
-        httpCall(`getDecks?account=${accountID}`, "POST")
+        httpCall(`getDecks?account=${accountID}`)
         .then((result) => {
             resolve(JSON.parse(result));
         })
@@ -45,7 +45,7 @@ function getDecks(accountID) {
 
 function getCards(deckID) {
     return new Promise((resolve, reject) => {
-        httpCall(`getCards?account=${deckID}`, "POST")
+        httpCall(`getCards?account=${deckID}`)
         .then((result) => {
             resolve(JSON.parse(result));
         })
