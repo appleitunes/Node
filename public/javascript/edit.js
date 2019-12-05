@@ -49,9 +49,29 @@ function createCard() {
     newTextArea = document.createElement("textarea");
     newTextArea.className = "text";
     newTextArea.placeholder = "BACK";
-    // setCard(newBack);
     newBack.appendChild(newTextArea);
+    setCard(newTextArea);
     newRow.appendChild(newBack);
 
     return newRow;
+}
+
+function saveCards() {
+    let container = document.getElementById("cards-container");
+    container.getElementsByClassName("row");
+
+    let data = [];
+
+    for (i in row) {
+        let card = row[i];
+        let textAreas = card[i].getElementsByTagName("textarea");
+        let front = textAreas[0].value;
+        let back = textAreas[1].value;
+        data.push({
+            front: front,
+            back: back
+        });
+    }
+
+    alert(JSON.stringify(data));
 }
