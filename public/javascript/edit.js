@@ -49,7 +49,7 @@ function createCard() {
     newTextArea.placeholder = "BACK";
     newRow.appendChild(newBack);
 
-    setCard(newRow);
+    setCard(newFront);
 
     return newRow;
 }
