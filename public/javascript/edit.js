@@ -64,7 +64,7 @@ function saveCards() {
 
     for (i in rows) {
         let card = rows[i];
-        let textAreas = card[i].getElementsByTagName("textarea");
+        let textAreas = card.getElementsByTagName("textarea");
         let front = textAreas[0].value;
         let back = textAreas[1].value;
         data.push({
