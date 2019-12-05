@@ -1,7 +1,5 @@
-var cardTemplate;
-
 function loadRest() {
-    setCards();
+    // setCards();
 }
 
 function setCard(card) {
@@ -20,9 +18,7 @@ function setCard(card) {
 }
 
 function addCard() {
-    let newCard = createCard();
-    document.getElementById("cards-container").appendChild(newCard);
-    setCard(newCard);
+    document.getElementById("cards-container").appendChild(createCard());
 }
 
 function deleteCard(card) {
@@ -52,6 +48,8 @@ function createCard() {
     newTextArea.className = "text";
     newTextArea.placeholder = "BACK";
     newRow.appendChild(newBack);
+
+    setCard(newRow);
 
     return newRow;
 }
