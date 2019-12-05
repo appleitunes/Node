@@ -14,11 +14,9 @@ function loadDecks(accountID) {
                 document.getElementById("list-container").innerHTML = "";
                 for (i in decks) {
                     let newDeck = decks[i];
-                    let templateCopy = template.replace("$title1", newDeck.title);
-                    templateCopy = templateCopy.replace("$title2", newDeck.title);
-                    templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
-                    templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
-                    document.getElementById("list-container").innerHTML += templateCopy;
+                    let title = newDeck.title;
+                    let id = newDeck.deck_id;
+                    document.getElementById("list_container").appendChild(createCard(title, id));
                 }
             }
         })
@@ -65,4 +63,30 @@ function getCards(deckID) {
 
 function editCard(cardID) {
     alert(cardID);
+}
+
+function createCard(title, cardID) {
+    // Create container
+    let newContainer = document.createElement("div");
+    newContainer.className = "item-container";
+
+    // Create card
+    let newCard = document.createElement("div");
+    newCard.className = "item";
+    newContainer.appendChild(newCard);
+
+    // Create title
+    let newTitle = document.createElement("h1");
+    newTitle.innerText = title;
+    newCard.appendChild(newTitle);
+
+    // Create options container
+    let newOptions = document.createElement("div");
+    newOptions.className = "options";
+    newCard.appendChild(newOptions);
+
+    // Create study option
+    let newStudy = document.createElement("img");
+    newStudy.src = "images/icons/study.png";
+    newStudy.onclick = () => { loadCards(cardID, title); };
 }
