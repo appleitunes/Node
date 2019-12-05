@@ -62,9 +62,12 @@ function saveCards() {
     let title = rawData.title;
     let data = decodeURI(JSON.stringify(rawData.data));
 
-    let url = `?title=${title}&data=${data}`;
+    let url = `addDeck?title=${title}&data=${data}`;
 
-    httpCall()
+    httpCall(url, "POST")
+    .then((result) => {
+        alert(result);
+    });
 }
 
 function getCardData() {

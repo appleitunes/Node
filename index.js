@@ -51,7 +51,10 @@ function getCards(req, res) {
    });
 }
 
-function addDeck() {
-   let deckID = req.query.account;
+function addDeck(req, res) {
+   let title = req.query.title;
+   let data = JSON.parse(req.query.data);
 
+   res.write(JSON.stringify(data));
+   res.end();
 }
