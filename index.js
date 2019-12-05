@@ -64,19 +64,40 @@ function addDeck(req, res) {
          res.end();
       }
       else {
-         addCards(data, result.insertId);
+         addCards(data, result.insertId)
+         .then(() => {
+            res.write(1);
+            res.end();
+         })
+         .catch((error) => {
+            res.write(error);
+            res.end();
+         });
       }
    });
-
-   res.write(JSON.stringify(data));
-   res.end();
 }
 
 function addCards(data, deckID) {
-   for (i in data) {
-      let front = i;
-      let back = data[i];
-      let SQL = `INSERT INTO DECK (front, back, owner_deck) VALUES (${front}, ${back}), ${deckID}`;
-      pool.query(SQL, null);
-   }
+   let completeCount = 0;
+   let limit = data.length;
+
+   return new Promise((resolve, reject) => {
+      for (i in data) {
+         let front = i;
+         let back = data[i];
+         let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES (${front}, ${back}), ${deckID}`;
+         pool.query(SQL, (err, result) => {
+            if (err) {
+               reject(err);
+            }
+            else {
+               completeCount += 1;
+
+               if (completeCount >= limit - 1) {
+                  resolve();
+               }
+            }
+         });
+      }
+   });
 }
