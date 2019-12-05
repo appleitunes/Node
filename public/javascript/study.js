@@ -89,4 +89,6 @@ function createCard(title, cardID) {
     let newStudy = document.createElement("img");
     newStudy.src = "images/icons/study.png";
     newStudy.onclick = () => { loadCards(cardID, title); };
+
+    return newContainer;
 }
