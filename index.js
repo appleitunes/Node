@@ -20,7 +20,7 @@ app.set("port", process.env.PORT || 5000)
 function getDecks(req, res) {
    let accountID = req.query.account;
 
-   let SQL = `SELECT title, deck_id FROM DECK WHERE owner_account=${accountID};`;
+   let SQL = `SELECT title, deck_id FROM DECK WHERE owner_account=${accountID}`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -37,7 +37,7 @@ function getDecks(req, res) {
 function getCards(req, res) {
    let deckID = req.query.account;
 
-   let SQL = `SELECT * FROM CARD WHERE owner_deck=${deckID};`;
+   let SQL = `SELECT * FROM CARD WHERE owner_deck=${deckID}`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -56,7 +56,7 @@ function addDeck(req, res) {
    let title = req.query.title;
    let data = JSON.parse(req.query.data);
 
-   let SQL = `INSERT INTO DECK (title, owner_account) VALUES (${title}, ${userID});`;
+   let SQL = `INSERT INTO DECK (title, owner_account) VALUES (${title}, ${userID})`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -85,7 +85,7 @@ function addCards(data, deckID) {
       for (i in data) {
          let front = i;
          let back = data[i];
-         let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES (${front}, ${back}), ${deckID};`;
+         let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES (${front}, ${back}), ${deckID}`;
          pool.query(SQL, (err, result) => {
             if (err) {
                reject(err);
