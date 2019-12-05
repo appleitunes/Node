@@ -16,7 +16,7 @@ function loadDecks(accountID) {
                     let newDeck = decks[i];
                     let title = newDeck.title;
                     let id = newDeck.deck_id;
-                    document.getElementById("list_container").appendChild(createCard(title, id));
+                    document.getElementById("list-container").appendChild(createCard(title, id));
                 }
             }
         })
@@ -89,6 +89,7 @@ function createCard(title, cardID) {
     let newStudy = document.createElement("img");
     newStudy.src = "images/icons/study.png";
     newStudy.onclick = () => { loadCards(cardID, title); };
+    newOptions.appendChild(newStudy);
 
     return newContainer;
 }
