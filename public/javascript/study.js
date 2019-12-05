@@ -3,27 +3,21 @@ function loadRest() {
 };
 
 function loadDecks(accountID) {
-    httpCall("../html/deck.html") 
-    .then((template) => {
-        getDecks(accountID)
-        .then((decks) => {
-            if (decks.length < 1) {
-                document.getElementById("list-container").innerHTML = "There are no Decks assigned to this account.";
+    getDecks(accountID)
+    .then((decks) => {
+        if (decks.length < 1) {
+            document.getElementById("list-container").innerHTML = "There are no Decks assigned to this account.";
+        }
+        else {
+            document.getElementById("list-container").innerHTML = "";
+            for (i in decks) {
+                let newDeck = decks[i];
+                let title = newDeck.title;
+                let id = newDeck.deck_id;
+                document.getElementById("list-container").appendChild(createCard(title, id));
             }
-            else {
-                document.getElementById("list-container").innerHTML = "";
-                for (i in decks) {
-                    let newDeck = decks[i];
-                    let title = newDeck.title;
-                    let id = newDeck.deck_id;
-                    document.getElementById("list-container").appendChild(createCard(title, id));
-                }
-            }
-        })
-        .catch((error) => {
-            document.getElementById("list-container").innerHTML = error;
-        });
-    });
+        }
+    })
 }
 
 function loadCards(deckID, title) {
@@ -65,6 +59,10 @@ function editCard(cardID) {
     alert(cardID);
 }
 
+function deleteCard(cardID) {
+    alert(cardID);
+}
+
 function createCard(title, cardID) {
     // Create container
     let newContainer = document.createElement("div");
@@ -90,6 +88,18 @@ function createCard(title, cardID) {
     newStudy.src = "images/icons/study.png";
     newStudy.onclick = () => { loadCards(cardID, title); };
     newOptions.appendChild(newStudy);
+
+    // Create edit option
+    let newEdit = document.createElement("img");
+    newEdit.src = "images/icons/edit.png";
+    newEdit.onclick = () => { editCard(cardID); };
+    newOptions.appendChild(newEdit);
+
+    // Create delete option
+    let newDelete = document.createElement("img");
+    newDelete.src = "images/icons/delete.png";
+    newDelete.onclick = () => { deleteCard(cardID); };
+    newOptions.appendChild(newDelete);
 
     return newContainer;
 }
