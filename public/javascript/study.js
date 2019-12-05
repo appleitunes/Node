@@ -17,6 +17,7 @@ function loadDecks(accountID) {
                     let templateCopy = template.replace("$title1", newDeck.title);
                     templateCopy = templateCopy.replace("$title2", newDeck.title);
                     templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
+                    templateCopy = templateCopy.replace("$deckID", newDeck.deck_id);
                     document.getElementById("list-container").innerHTML += templateCopy;
                 }
             }
@@ -60,4 +61,8 @@ function getCards(deckID) {
             reject(error);
         })
     });
+}
+
+function editCard(cardID) {
+    alert(cardID);
 }

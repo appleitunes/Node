@@ -9,28 +9,31 @@ function loadRest() {
     });
 }
 
-function setCards() {
-    let textareas = document.getElementsByClassName("text");
-   
-    for (i in textareas) {
-        let element = textareas[i];
- 
-         if (element.addEventListener) {
-             element.addEventListener("keyup", () => {
-                 element.style.height = "";
-                 element.style.height = element.scrollHeight + "px";
-             });
- 
-             element.parentElement.addEventListener("click", () => {
-                 element.focus();
-             });
-         }
-     }
+function setCards(card=null) {
+    if (!card) {
+        let textAreas = document.getElementsByClassName("text");
+    
+        for (i in textAreas) {
+            let element = textAreas[i];
+    
+            if (element.addEventListener) {
+                element.addEventListener("keyup", () => {
+                    element.style.height = "";
+                    element.style.height = element.scrollHeight + "px";
+                });
+
+                element.parentElement.addEventListener("click", () => {
+                    element.focus();
+                });
+            }
+        }
+    }
 }
 
 function addCard() {
     document.getElementById("cards-container").innerHTML += cardTemplate;
-    setCards();
+    let newCard = document.getElementsByClassName("text");
+    setCards(newCard[newCard.length - 1]);
 }
 
 function deleteCard(card) {
