@@ -2,40 +2,56 @@ var cardTemplate;
 
 function loadRest() {
     setCards();
-
-    httpCall("../html/card.html")
-    .then((template) => {
-        cardTemplate = template;
-    });
 }
 
-function setCards(card=null) {
-    if (!card) {
-        let textAreas = document.getElementsByClassName("text");
-    
-        for (i in textAreas) {
-            let element = textAreas[i];
-    
-            if (element.addEventListener) {
-                element.addEventListener("keyup", () => {
-                    element.style.height = "";
-                    element.style.height = element.scrollHeight + "px";
-                });
+function setCard(card) {
+    let element = card;
 
-                element.parentElement.addEventListener("click", () => {
-                    element.focus();
-                });
-            }
-        }
+    if (element.addEventListener) {
+        element.addEventListener("keyup", () => {
+            element.style.height = "";
+            element.style.height = element.scrollHeight + "px";
+        });
+
+        element.parentElement.addEventListener("click", () => {
+            element.focus();
+        });
     }
 }
 
 function addCard() {
-    document.getElementById("cards-container").innerHTML += cardTemplate;
-    let newCard = document.getElementsByClassName("text");
-    setCards(newCard[newCard.length - 1]);
+    let newCard = createCard();
+    document.getElementById("cards-container").appendChild(newCard);
+    setCard(newCard);
 }
 
 function deleteCard(card) {
-    card.parentElement.parentElement.removeChild(card.parentElement);
+    card.parentElement.removeChild(card);
+}
+
+function createCard() {
+    let newRow = document.createElement("li");
+    newRow.className = "row";
+
+    let newDelete = document.createElement("div");
+    newDelete.className = "delete";
+    newDelete.innerText = "X";
+    newDelete.onclick = () => { deleteCard(newRow); }
+    newRow.appendChild(newDelete);
+
+    let newFront = document.createElement("div");
+    newFront.className = "card";
+    let newTextArea = document.createElement("textarea");
+    newTextArea.className = "text";
+    newTextArea.placeholder = "FRONT";
+    newRow.appendChild(newFront);
+
+    let newBack = document.createElement("div");
+    newBack.className = "card";
+    newTextArea = document.createElement("textarea");
+    newTextArea.className = "text";
+    newTextArea.placeholder = "BACK";
+    newRow.appendChild(newBack);
+
+    return newRow;
 }
