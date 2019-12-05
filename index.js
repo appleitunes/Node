@@ -88,7 +88,7 @@ function addCards(data, deckID) {
          let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', ${deckID});`;
          pool.query(SQL, (err, result) => {
             if (err) {
-               reject(err.message);
+               reject(`Card: ${err.message}`);
             }
             else {
                completeCount += 1;
