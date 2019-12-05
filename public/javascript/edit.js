@@ -40,7 +40,7 @@ function createCard() {
     let newTextArea = document.createElement("textarea");
     newTextArea.className = "text";
     newTextArea.placeholder = "FRONT";
-    setCard(newTextArea);
+    setCard(newFront);
     newFront.appendChild(newTextArea);
     newRow.appendChild(newFront);
 
@@ -49,7 +49,7 @@ function createCard() {
     newTextArea = document.createElement("textarea");
     newTextArea.className = "text";
     newTextArea.placeholder = "BACK";
-    setCard(newTextArea);
+    setCard(newBack);
     newBack.appendChild(newTextArea);
     newRow.appendChild(newBack);
 
