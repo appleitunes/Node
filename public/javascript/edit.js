@@ -58,12 +58,12 @@ function createCard() {
 
 function saveCards() {
     let container = document.getElementById("cards-container");
-    container.getElementsByClassName("row");
+    let rows = container.getElementsByClassName("row");
 
     let data = [];
 
-    for (i in row) {
-        let card = row[i];
+    for (i in rows) {
+        let card = rows[i];
         let textAreas = card[i].getElementsByTagName("textarea");
         let front = textAreas[0].value;
         let back = textAreas[1].value;
