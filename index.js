@@ -60,7 +60,7 @@ function addDeck(req, res) {
 
    pool.query(SQL, (err, result) => {
       if (err) {
-         res.write(err);
+         res.write(err.message);
          res.end();
       }
       else {
@@ -88,7 +88,7 @@ function addCards(data, deckID) {
          let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES (${front}, ${back}), ${deckID}`;
          pool.query(SQL, (err, result) => {
             if (err) {
-               reject(err);
+               reject(err.message);
             }
             else {
                completeCount += 1;
