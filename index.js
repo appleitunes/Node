@@ -56,7 +56,8 @@ function addDeck(req, res) {
    let title = req.query.title;
    let data = JSON.parse(req.query.data);
 
-   let SQL = `INSERT INTO DECK (title, owner_account) VALUES ('${title}', ${userID});`;
+   let id = rand(100000);
+   let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${id}', '${title}', ${userID});`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -64,7 +65,7 @@ function addDeck(req, res) {
          res.end();
       }
       else {
-         addCards(data, result.insertId)
+         addCards(data, id)
          .then(() => {
             res.write(1);
             res.end();
@@ -101,4 +102,8 @@ function addCards(data, deckID) {
          });
       }
    });
+}
+
+function rand(range) {
+   return Math.random() * rand;
 }

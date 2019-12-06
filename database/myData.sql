@@ -9,7 +9,7 @@ CREATE TABLE ACCOUNT (
 );
 
 CREATE TABLE DECK (
-    deck_id         SERIAL          PRIMARY KEY
+    deck_id         VARCHAR(42)     PRIMARY KEY
 ,   title           VARCHAR(256)    NOT NULL
 ,   owner_account   SERIAL          REFERENCES ACCOUNT(account_id)
 );
@@ -18,7 +18,7 @@ CREATE TABLE CARD (
     card_id         SERIAL          PRIMARY KEY
 ,   front           VARCHAR(22)     NOT NULL
 ,   back            VARCHAR(22)     NOT NULL
-,   owner_deck      SERIAL          REFERENCES DECK(deck_id)
+,   owner_deck      VARCHAR(42)     REFERENCES DECK(deck_id)
 );
 
 INSERT INTO ACCOUNT (
