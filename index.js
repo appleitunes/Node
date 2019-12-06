@@ -60,13 +60,10 @@ function addDeck(req, res) {
 
    pool.query(SQL, (err, result) => {
       if (err) {
-         res.write(`Deck: err.message`);
+         res.write(`Deck: ${err.message}`);
          res.end();
       }
       else {
-         res.write(JSON.stringify(result));
-         res.end();
-
          addCards(data, result.insertId)
          .then(() => {
             res.write(1);
