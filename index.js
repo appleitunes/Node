@@ -37,7 +37,7 @@ function getDecks(req, res) {
 function getCards(req, res) {
    let deckID = req.query.account;
 
-   let SQL = `SELECT * FROM CARD WHERE owner_deck=${deckID};`;
+   let SQL = `SELECT * FROM CARD WHERE owner_deck='${deckID}';`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
