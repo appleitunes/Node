@@ -67,12 +67,7 @@ function saveCards() {
 
     httpCall(url, "POST")
     .then((result) => {
-        if (result == 1) {
-            document.location.href = "study.html";
-        }
-        else {
-            alert(result);
-        }
+        document.location.href = "study.html";
     })
     .catch((error) => {
         alert(error);

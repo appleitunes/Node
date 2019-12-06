@@ -71,20 +71,19 @@ function deleteDeck(req, res) {
 
       pool.query(SQL, (err, result) => {
          if (err) {
-            res.write(err.message);
-            res.end();
+            throw(err.message);
          }
          else {
             SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
 
             pool.query(SQL, (err, result) => {
                if (err) {
-                  res.write(err.message);
+                  throw(err.message);
                }
                else {
                   res.write(1);
+                  res.end();
                }
-               res.end();
             });
          }
       });
@@ -106,8 +105,7 @@ function addDeck(req, res) {
 
       pool.query(SQL, (err, result) => {
          if (err) {
-            res.write(`Deck: ${err.message}`);
-            res.end();
+            throw(`Deck: ${err.message}`);
          }
          else {
             addCards(data, newID)
@@ -116,8 +114,7 @@ function addDeck(req, res) {
                res.end();
             })
             .catch((error) => {
-               res.write(error);
-               res.end();
+               throw(error);
             });
          }
       });
@@ -129,27 +126,31 @@ function addDeck(req, res) {
 }
 
 function addCards(data, deckID) {
-   let completeCount = 0;
-   let limit = data.length;
-
    return new Promise((resolve, reject) => {
-      for (i in data) {
-         let card = data[i];
-         let front = card.front;
-         let back = card.back;
-         let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', '${deckID}');`;
-         pool.query(SQL, (err, result) => {
-            if (err) {
-               reject(`Card: ${err.message}`);
-            }
-            else {
-               completeCount += 1;
-
-               if (completeCount >= limit - 1) {
-                  resolve();
+      try {
+         let completeCount = 0;
+         let limit = data.length;
+         for (i in data) {
+            let card = data[i];
+            let front = card.front;
+            let back = card.back;
+            let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', '${deckID}');`;
+            pool.query(SQL, (err, result) => {
+               if (err) {
+                  throw(`Card: ${err.message}`);
                }
-            }
-         });
+               else {
+                  completeCount += 1;
+
+                  if (completeCount >= limit - 1) {
+                     resolve();
+                  }
+               }
+            });
+         }
+      }
+      catch(error) {
+         reject(error);
       }
    });
 }
