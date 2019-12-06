@@ -64,7 +64,9 @@ function addDeck(req, res) {
          res.end();
       }
       else {
-         addCards(data, result.insertId)
+         let id = result.insertId;
+
+         addCards(data, id)
          .then(() => {
             res.write(1);
             res.end();
