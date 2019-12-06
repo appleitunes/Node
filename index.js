@@ -60,7 +60,7 @@ function addDeck(req, res) {
 
    pool.query(SQL, (err, result) => {
       if (err) {
-         res.write(err.message);
+         res.write(`Deck: err.message`);
          res.end();
       }
       else {
