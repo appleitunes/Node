@@ -64,7 +64,7 @@ function editCard(cardID) {
 }
 
 function deleteCard(cardID) {
-    httpCall(`deleteDeck?deck_id=${cardID}&account=${id}`, "PUSH")
+    httpCall(`deleteDeck?deck_id=${cardID}&account=${id}`, "POST")
     .then((result) => {
         if (result !== 1) {
             alert(result);
