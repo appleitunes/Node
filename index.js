@@ -57,6 +57,7 @@ function deleteDeck(req, res) {
    let accountID = req.query.account;
 
    res.write(`deckID: ${deckID}; accountID: ${accountID}`);
+   res.end();
 
    let SQL = `DELETE FROM CARD WHERE owner_deck='${deckID}';`;
 
