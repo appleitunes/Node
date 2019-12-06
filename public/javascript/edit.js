@@ -74,7 +74,7 @@ function saveCards() {
             alert(result);
         }
     })
-    .catch((error) + {
+    .catch((error) => {
         alert(error);
     });
 }
