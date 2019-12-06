@@ -5,6 +5,8 @@ function loadRest() {
 };
 
 function loadDecks(accountID) {
+    document.getElementById("list-container").innerHTML = "";
+
     getDecks(accountID)
     .then((decks) => {
         if (decks.length < 1) {
@@ -62,7 +64,7 @@ function editCard(cardID) {
 }
 
 function deleteCard(cardID) {
-    httpCall(`deleteDeck?deck_id=${cardID}&account=${id}`)
+    httpCall(`deleteDeck?deck_id=${cardID}&account=${id}`, "PUSH")
     .then((result) => {
         if (result !== 1) {
             alert(result);
