@@ -63,14 +63,14 @@ function editCard(cardID) {
     alert(cardID);
 }
 
-function deleteCard(cardID) {
+function deleteCard(cardID, element) {
     httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
     .then((result) => {
         if (result !== 1) {
             alert(result);
         }
         else {
-            loadDecks(id);
+            element.parentElement.removeChild(element);
         }
     })
     .catch((error) => {
@@ -113,7 +113,7 @@ function createCard(title, cardID) {
     // Create delete option
     let newDelete = document.createElement("img");
     newDelete.src = "images/icons/delete.png";
-    newDelete.onclick = () => { deleteCard(cardID); };
+    newDelete.onclick = () => { deleteCard(cardID, newContainer); };
     newOptions.appendChild(newDelete);
 
     return newContainer;

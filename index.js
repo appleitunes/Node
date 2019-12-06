@@ -19,91 +19,113 @@ app.set("port", process.env.PORT || 5000)
 });
 
 function getDecks(req, res) {
-   let accountID = req.query.account;
+   try {
+      let accountID = req.query.account;
 
-   let SQL = `SELECT title, deck_id FROM DECK WHERE owner_account=${accountID};`;
+      let SQL = `SELECT title, deck_id FROM DECK WHERE owner_account=${accountID};`;
 
-   pool.query(SQL, (err, result) => {
-      if (err) {
-         res.write("0");
-         res.end();
-      }
-      else {
-         res.write(JSON.stringify(result.rows));
-         res.end();
-      }
-   });
+      pool.query(SQL, (err, result) => {
+         if (err) {
+            throw(err);
+         }
+         else {
+            res.write(JSON.stringify(result.rows));
+            res.end();
+         }
+      });
+   }
+   catch(error) {
+      res.write(error);
+      res.end();
+   }
 }
 
 function getCards(req, res) {
-   let accountID = req.query.account;
+   try {
+      let accountID = req.query.account;
 
-   let SQL = `SELECT * FROM CARD WHERE owner_deck='${accountID}';`;
+      let SQL = `SELECT * FROM CARD WHERE owner_deck='${accountID}';`;
 
-   pool.query(SQL, (err, result) => {
-      if (err) {
-         res.write("0");
-         res.end();
-      }
-      else {
-         res.write(JSON.stringify(result.rows));
-         res.end();
-      }
-   });
+      pool.query(SQL, (err, result) => {
+         if (err) {
+            throw(err);
+         }
+         else {
+            res.write(JSON.stringify(result.rows));
+            res.end();
+         }
+      });
+   }
+   catch(error) {
+      res.write(error);
+      res.end();
+   }
 }
 
 function deleteDeck(req, res) {
-   let deckID = req.query.id;
-   let accountID = req.query.account;
+   try {
+      let deckID = req.query.id;
+      let accountID = req.query.account;
 
-   let SQL = `DELETE FROM CARD WHERE owner_deck='${deckID}';`;
+      let SQL = `DELETE FROM CARD WHERE owner_deck='${deckID}';`;
 
-   pool.query(SQL, (err, result) => {
-      if (err) {
-         res.write(err.message);
-         res.end();
-      }
-      else {
-         SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
-
-         pool.query(SQL, (err, result) => {
-            if (err) {
-               res.write(err.message);
-            }
-            else {
-               res.write(1);
-            }
+      pool.query(SQL, (err, result) => {
+         if (err) {
+            res.write(err.message);
             res.end();
-         });
-      }
-   });
+         }
+         else {
+            SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
+
+            pool.query(SQL, (err, result) => {
+               if (err) {
+                  res.write(err.message);
+               }
+               else {
+                  res.write(1);
+               }
+               res.end();
+            });
+         }
+      });
+   }
+   catch(error) {
+      res.write(error);
+      res.end();
+   }
 }
 
 function addDeck(req, res) {
-   let userID = req.query.id;
-   let title = req.query.title;
-   let data = JSON.parse(req.query.data);
+   try {
+      let userID = req.query.id;
+      let title = req.query.title;
+      let data = JSON.parse(req.query.data);
 
-   let newID = rand(100000);
-   let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${newID}', '${title}', '${userID}');`;
+      let newID = rand(100000);
+      let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${newID}', '${title}', '${userID}');`;
 
-   pool.query(SQL, (err, result) => {
-      if (err) {
-         res.write(`Deck: ${err.message}`);
-         res.end();
-      }
-      else {
-         addCards(data, newID)
-         .then(() => {
-            res.write(1);
+      pool.query(SQL, (err, result) => {
+         if (err) {
+            res.write(`Deck: ${err.message}`);
             res.end();
-         })
-         .catch((error) => {
-            res.write(error);
-            res.end();
-         });
-      }
-   });
+         }
+         else {
+            addCards(data, newID)
+            .then(() => {
+               res.write(1);
+               res.end();
+            })
+            .catch((error) => {
+               res.write(error);
+               res.end();
+            });
+         }
+      });
+   }
+   catch(error) {
+      res.write(error);
+      res.end()
+   }
 }
 
 function addCards(data, deckID) {
