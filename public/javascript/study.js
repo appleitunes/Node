@@ -1,5 +1,7 @@
+var id = 1;
+
 function loadRest() {
-    loadDecks(1);
+    loadDecks(id);
 };
 
 function loadDecks(accountID) {
@@ -60,7 +62,18 @@ function editCard(cardID) {
 }
 
 function deleteCard(cardID) {
-    alert(cardID);
+    httpCall(`deleteDeck?deck_id=${cardID}&account=${id}`)
+    .then((result) => {
+        if (result !== 1) {
+            alert(result);
+        }
+        else {
+            loadDecks(id);
+        }
+    })
+    .catch((error) => {
+        alert(error);
+    });
 }
 
 function createCard(title, cardID) {

@@ -13,6 +13,7 @@ app.set("port", process.env.PORT || 5000)
 .get("/getDecks", getDecks)
 .get("/getCards", getCards)
 .post("/addDeck", addDeck)
+.post("/deleteDeck", deleteDeck)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
 });
@@ -35,9 +36,9 @@ function getDecks(req, res) {
 }
 
 function getCards(req, res) {
-   let deckID = req.query.account;
+   let accountID = req.query.account;
 
-   let SQL = `SELECT * FROM CARD WHERE owner_deck='${deckID}';`;
+   let SQL = `SELECT * FROM CARD WHERE owner_deck='${accountID}';`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -51,13 +52,30 @@ function getCards(req, res) {
    });
 }
 
+function deleteDeck(req, res) {
+   let deckID = req.query.id;
+   let accountID = req.query.account;
+
+   let SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
+
+   pool.query(SQL, (err, result) => {
+      if (err) {
+         res.write(err.message);
+      }
+      else {
+         res.write(1);
+      }
+      res.end();
+   });
+}
+
 function addDeck(req, res) {
    let userID = req.query.id;
    let title = req.query.title;
    let data = JSON.parse(req.query.data);
 
-   let id = rand(100000);
-   let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${id}', '${title}', '${userID}');`;
+   let newID = rand(100000);
+   let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${newID}', '${title}', '${userID}');`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -65,7 +83,7 @@ function addDeck(req, res) {
          res.end();
       }
       else {
-         addCards(data, id)
+         addCards(data, newID)
          .then(() => {
             res.write(1);
             res.end();
@@ -90,7 +108,7 @@ function addCards(data, deckID) {
          let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', '${deckID}');`;
          pool.query(SQL, (err, result) => {
             if (err) {
-               reject(`Card: ${err.message}. front: ${front}; back: ${back}; id: ${deckID}`);
+               reject(`Card: ${err.message}`);
             }
             else {
                completeCount += 1;
