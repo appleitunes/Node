@@ -53,9 +53,6 @@ function getCards(req, res) {
 }
 
 function deleteDeck(req, res) {
-   res.write("We're here.");
-   res.end();
-
    let deckID = req.query.id;
    let accountID = req.query.account;
 
