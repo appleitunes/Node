@@ -56,32 +56,27 @@ function deleteDeck(req, res) {
    let deckID = req.query.id;
    let accountID = req.query.account;
 
-   res.write(`deckID: ${deckID}; accountID: ${accountID}`);
-   res.end();
-
    let SQL = `DELETE FROM CARD WHERE owner_deck='${deckID}';`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
          res.write(err.message);
+         res.end();
       }
       else {
-         res.write(1);
+         SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
+
+         pool.query(SQL, (err, result) => {
+            if (err) {
+               res.write(err.message);
+            }
+            else {
+               res.write(1);
+            }
+            res.end();
+         });
       }
-      res.end();
    });
-
-   // SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
-
-   // pool.query(SQL, (err, result) => {
-   //    if (err) {
-   //       res.write(err.message);
-   //    }
-   //    else {
-   //       res.write(1);
-   //    }
-   //    res.end();
-   // });
 }
 
 function addDeck(req, res) {
