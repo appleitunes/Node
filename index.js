@@ -57,7 +57,7 @@ function addDeck(req, res) {
    let data = JSON.parse(req.query.data);
 
    let id = rand(100000);
-   let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${id}', '${title}', ${userID});`;
+   let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${id}', '${title}', '${userID}');`;
 
    pool.query(SQL, (err, result) => {
       if (err) {
@@ -87,7 +87,7 @@ function addCards(data, deckID) {
          let card = data[i];
          let front = card.front;
          let back = card.back;
-         let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', ${deckID});`;
+         let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', '${deckID}');`;
          pool.query(SQL, (err, result) => {
             if (err) {
                reject(`Card: ${err.message}. front: ${front}; back: ${back}; id: ${deckID}`);
