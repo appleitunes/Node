@@ -64,9 +64,10 @@ function addDeck(req, res) {
          res.end();
       }
       else {
-         let id = result.insertId;
+         res.write(JSON.stringify(result));
+         res.end();
 
-         addCards(data, id)
+         addCards(data, result.insertId)
          .then(() => {
             res.write(1);
             res.end();
