@@ -68,17 +68,17 @@ function deleteDeck(req, res) {
       res.end();
    });
 
-   SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
+   // SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
 
-   pool.query(SQL, (err, result) => {
-      if (err) {
-         res.write(err.message);
-      }
-      else {
-         res.write(1);
-      }
-      res.end();
-   });
+   // pool.query(SQL, (err, result) => {
+   //    if (err) {
+   //       res.write(err.message);
+   //    }
+   //    else {
+   //       res.write(1);
+   //    }
+   //    res.end();
+   // });
 }
 
 function addDeck(req, res) {
