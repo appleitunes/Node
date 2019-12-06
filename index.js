@@ -105,5 +105,5 @@ function addCards(data, deckID) {
 }
 
 function rand(range) {
-   return Math.random() * rand;
+   return Math.random() * range;
 }
