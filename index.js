@@ -74,7 +74,7 @@ function deleteDeck(req, res) {
             throw(err.message);
          }
          else {
-            SQL = `DELETE FROM DECK WHERE deck_id='${deckID}' and owner_account='${accountID}';`;
+            SQL = `DELETE FROM DECK WHERE deck_id='${deckID}';`;
 
             pool.query(SQL, (err, result) => {
                if (err) {
