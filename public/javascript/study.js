@@ -60,7 +60,7 @@ function getCards(deckID) {
 }
 
 function editCard(cardID) {
-    document.location.href = `quiz.html?deck=${cardID}`;
+    document.location.href = `edit.html?deck=${cardID}`;
 }
 
 function deleteCard(cardID, element) {
