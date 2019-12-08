@@ -28,21 +28,3 @@ INSERT INTO ACCOUNT (
     'example@email.com'
 ,   'password'
 );
-
-INSERT INTO DECK (
-    title
-,   owner_account
-) VALUES (
-    'Simple English'
-,   1
-);
-
-INSERT INTO CARD (
-    front
-,   back
-,   owner_deck
-) VALUES (
-    'yes'
-,   'yes'
-,    5
-);
