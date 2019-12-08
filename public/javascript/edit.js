@@ -8,9 +8,9 @@ function loadRest() {
     if (deckID) {
         getCards(deckID)
         .then((result) => {
-            alert(JSON.stringify(result));
             for (i in result) {
                 let card = result[i];
+                alert(card.front);
                 createCard(card.front, card.back);
             }
         })
