@@ -103,6 +103,19 @@ function saveCards() {
             alert(error);
         });
     }
+    else {
+        deleteDeck(deckID)
+        .then(() => {
+            httpCall(url, "POST")
+            .then((result) => {
+                alert(result);
+                document.location.href = "/";
+            })
+            .catch((error) => {
+                alert(error);
+            });
+        });
+    }
 }
 
 function getCardData() {
