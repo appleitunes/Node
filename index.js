@@ -73,19 +73,17 @@ function deleteDeck(req, res) {
          if (err) {
             throw(err.message);
          }
-         else {
-            SQL = `DELETE FROM DECK WHERE deck_id='${deckID}';`;
+  
+         SQL = `DELETE FROM DECK WHERE deck_id='${deckID}';`;
 
-            pool.query(SQL, (err, result) => {
-               if (err) {
-                  throw(err.message);
-               }
-               else {
-                  res.write(1);
-                  res.end();
-               }
-            });
-         }
+         pool.query(SQL, (err, result) => {
+            if (err) {
+               throw(err.message);
+            }
+
+            res.write("Done");
+            res.end();
+         });
       });
    }
    catch(error) {
@@ -107,16 +105,15 @@ function addDeck(req, res) {
          if (err) {
             throw(`Deck: ${err.message}`);
          }
-         else {
-            addCards(data, newID)
-            .then(() => {
-               res.write(1);
-               res.end();
-            })
-            .catch((error) => {
-               throw(error);
-            });
-         }
+
+         addCards(data, newID)
+         .then(() => {
+            res.write("Done");
+            res.end();
+         })
+         .catch((error) => {
+            throw(error);
+         });
       });
    }
    catch(error) {
@@ -139,12 +136,11 @@ function addCards(data, deckID) {
                if (err) {
                   throw(`Card: ${err.message}`);
                }
-               else {
-                  completeCount += 1;
+   
+               completeCount += 1;
 
-                  if (completeCount >= limit - 1) {
-                     resolve();
-                  }
+               if (completeCount >= limit - 1) {
+                  resolve();
                }
             });
          }

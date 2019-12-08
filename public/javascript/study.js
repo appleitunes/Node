@@ -64,12 +64,15 @@ function editCard(cardID) {
 }
 
 function deleteCard(cardID, element) {
+    element.style.visibility = "hidden";
+
     httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
     .then((result) => {
         element.parentElement.removeChild(element);
     })
     .catch((error) => {
         alert(error);
+        element.style.visibility = "visible";
     });
 }
 
