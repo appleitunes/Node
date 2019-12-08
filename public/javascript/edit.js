@@ -10,8 +10,7 @@ function loadRest() {
         .then((result) => {
             for (i in result) {
                 let card = result[i];
-                alert(card.front);
-                createCard(card.front, card.back);
+                addCard(card.front, card.back);
             }
         })
         .catch((error) => {
@@ -36,8 +35,8 @@ function setCard(card) {
     }
 }
 
-function addCard() {
-    let newCard = createCard();
+function addCard(front="", back="") {
+    let newCard = createCard(front, back);
     document.getElementById("cards-container").appendChild(newCard);
 }
 
