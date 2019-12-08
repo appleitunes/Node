@@ -131,7 +131,8 @@ function addCards(data, deckID) {
             let card = data[i];
             let front = card.front;
             let back = card.back;
-            let SQL = `INSERT INTO CARD (front, back, owner_deck) VALUES ('${front}', '${back}', '${deckID}');`;
+            let newID = rand(100000);
+            let SQL = `INSERT INTO CARD (card_id, front, back, owner_deck) VALUES ('${newID}', '${front}', '${back}', '${deckID}');`;
             pool.query(SQL, (err, result) => {
                if (err) {
                   throw(`Card: ${err.message}`);

@@ -1,3 +1,5 @@
+var id = 1;
+
 function loadRest() {
     // setCards();
 }
@@ -61,7 +63,6 @@ function saveCards() {
     let rawData = getCardData();
     let title = rawData.title;
     let data = decodeURI(JSON.stringify(rawData.data));
-    let id = 1;
 
     let url = `addDeck?id=${id}&title=${title}&data=${data}`;
 

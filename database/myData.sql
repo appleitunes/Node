@@ -15,7 +15,7 @@ CREATE TABLE DECK (
 );
 
 CREATE TABLE CARD (
-    card_id         SERIAL          PRIMARY KEY
+    card_id         VARCHAR(42)     PRIMARY KEY
 ,   front           VARCHAR(22)     NOT NULL
 ,   back            VARCHAR(22)     NOT NULL
 ,   owner_deck      VARCHAR(42)     REFERENCES DECK(deck_id)

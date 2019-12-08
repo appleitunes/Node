@@ -68,6 +68,7 @@ function deleteCard(cardID, element) {
 
     httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
     .then((result) => {
+        alert(result);
         element.parentElement.removeChild(element);
     })
     .catch((error) => {
