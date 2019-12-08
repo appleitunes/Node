@@ -26,12 +26,11 @@ function getDecks(req, res) {
 
       pool.query(SQL, (err, result) => {
          if (err) {
-            throw(err);
+            throw(err.message);
          }
-         else {
-            res.write(JSON.stringify(result.rows));
-            res.end();
-         }
+
+         res.write(JSON.stringify(result.rows));
+         res.end();
       });
    }
    catch(error) {
@@ -48,7 +47,7 @@ function getCards(req, res) {
 
       pool.query(SQL, (err, result) => {
          if (err) {
-            throw(err);
+            throw(err.message);
          }
          else {
             res.write(JSON.stringify(result.rows));
@@ -98,7 +97,7 @@ function addDeck(req, res) {
       let title = req.query.title;
       let data = JSON.parse(req.query.data);
 
-      let newID = rand(100000);
+      let newID = rand();
       let SQL = `INSERT INTO DECK (deck_id, title, owner_account) VALUES ('${newID}', '${title}', '${userID}');`;
 
       pool.query(SQL, (err, result) => {
@@ -131,7 +130,7 @@ function addCards(data, deckID) {
             let card = data[i];
             let front = card.front;
             let back = card.back;
-            let newID = rand(100000);
+            let newID = rand();
             let SQL = `INSERT INTO CARD (card_id, front, back, owner_deck) VALUES ('${newID}', '${front}', '${back}', '${deckID}');`;
             pool.query(SQL, (err, result) => {
                if (err) {
