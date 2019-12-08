@@ -4,6 +4,7 @@ var deckID;
 function loadRest() {
     let urlParams = new URLSearchParams(window.location.search);
     deckID = urlParams.get("deck");
+    alert(deckID);
 
     if (deckID) {
         getCards(deckID)
@@ -14,7 +15,7 @@ function loadRest() {
                 createCard(card.front, card.back);
             }
         })
-        .then((error) => {
+        .catch((error) => {
             alert(error);
         });
     }
