@@ -4,14 +4,13 @@ var deckID;
 function loadRest() {
     let urlParams = new URLSearchParams(window.location.search);
     deckID = urlParams.get("deck");
-    alert(deckID);
 
     if (deckID) {
         getCards(deckID)
         .then((result) => {
+            alert(JSON.stringify(result));
             for (i in result) {
                 let card = result[i];
-
                 createCard(card.front, card.back);
             }
         })
