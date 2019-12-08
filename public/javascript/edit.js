@@ -3,9 +3,12 @@ var deckID;
 
 function loadRest() {
     let urlParams = new URLSearchParams(window.location.search);
+    let title = urlParams.get("title");
     deckID = urlParams.get("deck");
 
     if (deckID) {
+        document.getElementById("input-title").value = title;
+
         getCards(deckID)
         .then((result) => {
             for (i in result) {

@@ -59,13 +59,13 @@ function getCards(deckID) {
     });
 }
 
-function editCard(cardID) {
-    document.location.href = `edit.html?deck=${cardID}`;
+function editCard(cardID, title) {
+    document.location.href = `edit.html?deck=${cardID}&title=${title}`;
 }
 
 function deleteCard(cardID, element) {
     if (window.confirm("Are you sure?")) {
-        element.style.visibility = "hidden";
+        element.style.display = "none";
 
         httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
         .then((result) => {
@@ -74,7 +74,7 @@ function deleteCard(cardID, element) {
         })
         .catch((error) => {
             alert(error);
-            element.style.visibility = "visible";
+            element.style.display = "block";
         });
     }
 }
@@ -108,7 +108,7 @@ function createCard(title, cardID) {
     // Create edit option
     let newEdit = document.createElement("img");
     newEdit.src = "images/icons/edit.png";
-    newEdit.onclick = () => { editCard(cardID); };
+    newEdit.onclick = () => { editCard(cardID, title); };
     newOptions.appendChild(newEdit);
 
     // Create delete option
