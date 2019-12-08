@@ -1,7 +1,24 @@
 var id = 1;
+var deckID;
 
 function loadRest() {
-    // setCards();
+    let urlParams = new URLSearchParams(window.location.search);
+    deckID = urlParams.get("deck");
+
+    if (deckID) {
+        getCards(deckID)
+        .then((result) => {
+            for (i in result) {
+                let card = result[i];
+
+                createCard(card.front, card.back);
+            }
+        })
+        .then((error) => {
+            alert(error);
+        });
+    }
+
 }
 
 function setCard(card) {
@@ -28,7 +45,7 @@ function deleteCard(card) {
     card.parentElement.removeChild(card);
 }
 
-function createCard() {
+function createCard(front="", back="") {
     let newRow = document.createElement("li");
     newRow.className = "row";
 
@@ -44,6 +61,7 @@ function createCard() {
     newTextArea.className = "text";
     newTextArea.placeholder = "FRONT";
     newTextArea.maxLength = "40";
+    newTextArea.value = front;
     newFront.appendChild(newTextArea);
     setCard(newTextArea);
     newRow.appendChild(newFront);
@@ -54,6 +72,7 @@ function createCard() {
     newTextArea.className = "text";
     newTextArea.placeholder = "BACK";
     newTextArea.maxLength = "40";
+    newTextArea.value = back;
     newBack.appendChild(newTextArea);
     setCard(newTextArea);
     newRow.appendChild(newBack);
@@ -68,14 +87,22 @@ function saveCards() {
 
     let url = `addDeck?id=${id}&title=${title}&data=${data}`;
 
-    httpCall(url, "POST")
-    .then((result) => {
-        alert(result);
-        document.location.href = "study.html";
-    })
-    .catch((error) => {
-        alert(error);
-    });
+    if (deckID) {
+        deleteDeck(deckID)
+        .then(() => {
+            httpCall(url, "POST")
+            .then((result) => {
+                alert(result);
+                document.location.href = "/";
+            })
+            .catch((error) => {
+                alert(error);
+            });
+        })
+        .catch((error) => {
+            alert(error);
+        });
+    }
 }
 
 function getCardData() {
@@ -97,4 +124,28 @@ function getCardData() {
         title: title,
         data: data
     }
+}
+
+function getCards(deckID) {
+    return new Promise((resolve, reject) => {
+        httpCall(`getCards?account=${deckID}`)
+        .then((result) => {
+            resolve(JSON.parse(result));
+        })
+        .catch((error) => {
+            reject(error);
+        })
+    });
+}
+
+function deleteDeck(cardID) {
+    return new Promise((resolve, reject) => {
+        httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
+        .then((result) => {
+            resolve();
+        })
+        .catch((error) => {
+            reject(error);
+        });
+    });
 }

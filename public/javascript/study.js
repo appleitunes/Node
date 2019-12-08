@@ -60,21 +60,23 @@ function getCards(deckID) {
 }
 
 function editCard(cardID) {
-    alert(cardID);
+    document.href.location = `quiz.html?deck=${cardID}`;
 }
 
 function deleteCard(cardID, element) {
-    element.style.visibility = "hidden";
+    if (window.confirm("Are you sure?")) {
+        element.style.visibility = "hidden";
 
-    httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
-    .then((result) => {
-        alert(result);
-        element.parentElement.removeChild(element);
-    })
-    .catch((error) => {
-        alert(error);
-        element.style.visibility = "visible";
-    });
+        httpCall(`deleteDeck?id=${cardID}&account=${id}`, "POST")
+        .then((result) => {
+            alert(result);
+            element.parentElement.removeChild(element);
+        })
+        .catch((error) => {
+            alert(error);
+            element.style.visibility = "visible";
+        });
+    }
 }
 
 function createCard(title, cardID) {
