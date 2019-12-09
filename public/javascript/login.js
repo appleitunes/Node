@@ -1,4 +1,4 @@
-function login() {
+function createAccount() {
     let username = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
