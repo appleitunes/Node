@@ -4,7 +4,7 @@ function login() {
 
     let url = `createAccount?username=${username}&password=${password}`;
 
-    httpCall(url)
+    httpCall(url, "POST")
     .then((result) => {
         alert(result);
     })
