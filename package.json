@@ -1,13 +1,13 @@
 {
-  "name": "classgame",
+  "name": "webapp",
   "version": "1.0.0",
-  "description": "this is going to be rock, paper, scissors",
+  "description": "Flash card app.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "Brother Birch",
+  "author": "Shane Davenport",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.7",

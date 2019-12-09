@@ -20,7 +20,9 @@ function loadRest() {
             alert(error);
         });
     }
-
+    else {
+        addCard();
+    }
 }
 
 function setCard(card) {

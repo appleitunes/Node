@@ -14,6 +14,7 @@ app.set("port", process.env.PORT || 5000)
 .get("/getCards", getCards)
 .post("/addDeck", addDeck)
 .post("/deleteDeck", deleteDeck)
+.post("/createAccount", createAccount)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
 });
@@ -151,9 +152,31 @@ function addCards(data, deckID) {
    });
 }
 
+function createAccount(req, res) {
+   try {
+      let email = req.query.email;
+      let password = req.query.password;
+
+      let SQL = `INSERT INTO ACCOUNT (email, pass) VALUES ('${email}', '${password}');`;
+
+      pool.query(SQL, (err, result) => {
+         if (err) {
+            throw(`Card: ${err.message}`);
+         }
+
+         res.write("Done");
+         res.end();
+      });
+   }
+   catch(error) {
+      res.write(error);
+      res.end();
+   }
+}
+
 function rand(length=40) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var result = '';
+   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
    var charactersLength = characters.length;
    for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
