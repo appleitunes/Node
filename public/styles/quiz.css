@@ -1,4 +1,6 @@
 #card_container {
+    margin: auto;
+    width: 50em;
     overflow: scroll;
     text-align: center;
     padding-top: 2em;

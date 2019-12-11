@@ -135,7 +135,7 @@ class Deck {
             this.objects.input.disabled = false;
             this.disabled = false;
             this.objects.input.focus();
-        }, 10);
+        }, 25);
     }
 
     // Move the card object offscreen

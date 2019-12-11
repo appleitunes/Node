@@ -2,7 +2,7 @@ function createAccount() {
     let username = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    let url = `createAccount?username=${username}&password=${password}`;
+    let url = `createAccount?email=${username}&password=${password}`;
 
     httpCall(url, "POST")
     .then((result) => {

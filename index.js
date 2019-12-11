@@ -15,6 +15,7 @@ app.set("port", process.env.PORT || 5000)
 .post("/addDeck", addDeck)
 .post("/deleteDeck", deleteDeck)
 .post("/createAccount", createAccount)
+.post("/login", login)
 .listen(app.get("port"), () => {
    console.log("Listening on port: " + app.get("port"));
 });
@@ -164,6 +165,7 @@ function createAccount(req, res) {
             throw(`Card: ${err.message}`);
          }
 
+         login(req, res);
          res.write("Done");
          res.end();
       });
@@ -174,9 +176,20 @@ function createAccount(req, res) {
    }
 }
 
+function login(req, res) {
+   try {
+      let email = req.query.email;
+      req.session.user = email;
+   }
+   catch(error) {
+      res.write(error);
+      res.end();
+   }
+}
+
 function rand(length=40) {
-   var result = '';
-   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var result = "";
+   var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
    var charactersLength = characters.length;
    for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
