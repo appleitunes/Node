@@ -10,11 +10,12 @@ input[type=text] {
     box-shadow: none;
     overflow: auto;
     outline: none;
+
+    max-width: 95%;
 }
 
 .row {
     width: 30em;
-    max-width: 100%;
     margin: auto;
 
     display: flex;
@@ -22,6 +23,8 @@ input[type=text] {
     justify-content: space-around;
 
     padding: 1em;
+
+    max-width: 95%;
 }
 
 .card {
@@ -90,4 +93,8 @@ textarea {
     padding: 0.5em;
     line-height: 1em;
     cursor: pointer;
+}
+
+.banner {
+    max-width: 95%;
 }
