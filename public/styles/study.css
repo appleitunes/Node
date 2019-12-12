@@ -7,7 +7,7 @@
     background-color: rgb(40, 148, 184);
     color: white;
     transition: 0.15s;
-    height: 4em;
+    height: fit-content;
 }
 
 .sidebar-container:hover {
